@@ -26,7 +26,7 @@ Solidworks API ported for Python
 Features
 --------
 
-* TODO
+* TODO - A lot... 
 
 Credits
 -------
