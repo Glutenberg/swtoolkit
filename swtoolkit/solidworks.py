@@ -1,14 +1,12 @@
 import subprocess as sb
 import win32com.client
 
-# import pythoncom
-
 from .interfaces.isldworks import ISldWorks
 
 
 class SolidWorks(ISldWorks):
     def __init__(self):
-        pass
+        super().__init__()
 
     @staticmethod
     def start(*args):
