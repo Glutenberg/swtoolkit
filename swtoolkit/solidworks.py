@@ -3,7 +3,7 @@ import win32com.client
 
 # import pythoncom
 
-from .interface.isldworks import ISldWorks
+from .interfaces.isldworks import ISldWorks
 
 
 class SolidWorks(ISldWorks):
@@ -11,7 +11,7 @@ class SolidWorks(ISldWorks):
         pass
 
     @staticmethod
-    def start(self, *args):
+    def start(*args):
         """Starts instance of SolidWorks.
         :param: The last 2 digits of your solidworks distribution release year.
         """
@@ -27,11 +27,10 @@ class SolidWorks(ISldWorks):
             win32com.client.Dispatch(SW_PROCESS_NAME)
 
     @staticmethod
-    def kill(self):
+    def kill():
         """Force kill SLDWORKS.exe process. """
         sb.call("Taskkill /IM SLDWORKS.exe /F")
 
-    @staticmethod
     def connect(self):
         """ Establish connection with Solidworks """
 
