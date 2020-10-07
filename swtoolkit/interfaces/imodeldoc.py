@@ -3,5 +3,5 @@ import pythoncom
 
 
 class IModelDoc:
-    def __init__(self):
-        pass
+    def __init__(self, swcom):
+        self.swcom = swcom
