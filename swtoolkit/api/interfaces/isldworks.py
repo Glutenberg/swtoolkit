@@ -27,14 +27,18 @@ class ISldWorks:
     def startup_completed(self):
         return self.swcom.StartupProcessCompleted
 
-    def open(self, file_path):
+    def open(self, file_path, *args, **kwargs):
         """Opens specified document
         :param file_path: The path of the file to be opened
         :type name: raw str
+
+        FileName, Type, Options, Configuration, Errors, Warnings
         """
 
         self.path = file_path
         self.path = self.path.replace("\\", "/")
+        self.options = kwargs["options"]
+        self.config = ""
 
         if os.path.splitext(self.path)[1] == ".SLDPRT":
             self.type_value = 1
@@ -50,10 +54,14 @@ class ISldWorks:
         arg1 = win32com.client.VARIANT(pythoncom.VT_BSTR, self.path)
         arg2 = win32com.client.VARIANT(pythoncom.VT_I4, self.type_value)
         arg3 = win32com.client.VARIANT(pythoncom.VT_I4, 1)
+        arg4 = win32com.client.VARIANT(pythoncom.VT_BSTR, self.config)
         arg5 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, 2)
         arg6 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, 128)
 
-        openDoc(arg1, arg2, arg3, "", arg5, arg6)
+        openDoc(arg1, arg2, arg3, arg4, arg5, arg6)
+
+    def activate_doc(self):
+        pass
 
     def close_all_documents(self):
         pass
@@ -98,4 +106,11 @@ class ISldWorks:
         pass
 
     def save_settings(self):
+        pass
+
+    def get_cwd(self):
+        "get the current working directory"
+        pass
+
+    def get_documents(self):
         pass
