@@ -3,29 +3,37 @@ import os
 import win32com.client
 import pythoncom
 
+from ..com import COM
+
 
 class ISldWorks:
-    def __init__(self):
-        self.swcom = win32com.client.Dispatch("SldWorks.Application")
+    def __init__(self, *args, **kwargs):
+        self.isldworks = COM("SldWorks.Application")
+        self.visible = kwargs["visible"]
+        self.isldworks.Visible = self.visible
 
     def __enter__(self):
-        return self.swcom
+        return self.isldworks
 
-    def __exit__(self):
-        self.swcom = None
+    def __exit__(self, type, value, traceback):
+        self.isldworks = None
         return True
 
     @property
     def active_doc(self):
-        return self.swcom.ActiveDoc
+        return self.isldworks.ActiveDoc
+
+    # @property
+    # def visible(self):
+    #     return self.isldworks.Visible
 
     @property
-    def is_visible(self):
-        return self.swcom.Visible
+    def frame_state(self):
+        pass
 
     @property
     def startup_completed(self):
-        return self.swcom.StartupProcessCompleted
+        return self.isldworks.StartupProcessCompleted
 
     def open(self, file_path, *args, **kwargs):
         """Opens specified document
@@ -50,7 +58,7 @@ class ISldWorks:
             print("Invalid Document Type")
             return
 
-        openDoc = self.swcom.OpenDoc6
+        openDoc = self.isldworks.OpenDoc6
         arg1 = win32com.client.VARIANT(pythoncom.VT_BSTR, self.path)
         arg2 = win32com.client.VARIANT(pythoncom.VT_I4, self.type_value)
         arg3 = win32com.client.VARIANT(pythoncom.VT_I4, 1)
@@ -72,16 +80,7 @@ class ISldWorks:
     def new_document(self, template_name, paper_size, width, height):
         pass
 
-    def move_document(
-        self,
-        source_doc,
-        dest_doc,
-        child_count,
-        from_children,
-        to_children,
-        option,
-        value,
-    ):
+    def move_document(self, *args, **kwargs):
         pass
 
     def is_background_processing_complete(self, path):
@@ -109,8 +108,28 @@ class ISldWorks:
         pass
 
     def get_cwd(self):
-        "get the current working directory"
-        pass
+        return self.isldworks.GetCurrentWorkingDirectory()
 
     def get_documents(self):
         pass
+
+    def exit_app(self):
+        self.isldworks.ExitApp()
+
+    def activate_task_pane(self):
+        pass
+
+    def get_imodeler(self):
+        return self.isldworks.GetModeler()
+
+    def get_mass_properties(self):
+        pass
+
+    def get_user_unit(self):
+        pass
+
+    def get_template_sizes(self):
+        pass
+
+    def get_imathutility(self):
+        return self.isldworks.IGetMathUtility()

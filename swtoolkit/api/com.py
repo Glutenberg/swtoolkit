@@ -2,11 +2,22 @@ import win32com.client
 
 
 class COM:
-    def __init__(self):
-        pass
+    """COM Interface singleton implementation
 
-    def connect(self):
-        """ Establish connection with Solidworks """
+    Program     | Prog ID
+    ----------- | -------
+    Solidworks  | SldWorks.Application
 
-        self.swcom = win32com.client.Dispatch("SldWorks.Application")
-        return self.swcom
+    """
+
+    class __COM:
+        def __init__(self, prog_id):
+            self.prog_id = prog_id
+            self.com = win32com.client.Dispatch(self.prog_id)
+
+    instance = None
+
+    def __new__(cls, prog_id):
+        if not COM.instance:
+            COM.instance = COM.__COM(prog_id).com
+        return COM.instance

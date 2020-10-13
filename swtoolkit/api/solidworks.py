@@ -5,8 +5,8 @@ from .interfaces.isldworks import ISldWorks
 
 
 class SolidWorks(ISldWorks):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     @staticmethod
     def start(*args):
@@ -28,9 +28,3 @@ class SolidWorks(ISldWorks):
     def kill():
         """Force kill SLDWORKS.exe process. """
         sb.call("Taskkill /IM SLDWORKS.exe /F")
-
-    def connect(self):
-        """ Establish connection with Solidworks """
-
-        self.swcom = win32com.client.Dispatch("SldWorks.Application")
-        return self.swcom
