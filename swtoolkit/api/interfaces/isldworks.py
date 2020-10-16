@@ -7,10 +7,10 @@ from ..com import COM
 
 
 class ISldWorks:
-    def __init__(self, *args, **kwargs):
+    def __init__(self, visible=True, *args, **kwargs):
         self.isldworks = COM("SldWorks.Application")
-        self.visible = kwargs["visible"]
-        self.isldworks.Visible = self.visible
+        self.isldworks.Visible = visible
+        self.debug = 1
 
     def __enter__(self):
         return self.isldworks
@@ -19,13 +19,12 @@ class ISldWorks:
         self.isldworks = None
         return True
 
+    def __del__(self):
+        COM.instance = None
+
     @property
     def active_doc(self):
         return self.isldworks.ActiveDoc
-
-    # @property
-    # def visible(self):
-    #     return self.isldworks.Visible
 
     @property
     def frame_state(self):

@@ -7,6 +7,7 @@ class COM:
     Program     | Prog ID
     ----------- | -------
     Solidworks  | SldWorks.Application
+    Excel       | Excel.Application
 
     """
 
