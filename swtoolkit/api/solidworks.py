@@ -1,12 +1,19 @@
 import subprocess as sb
 import win32com.client
 
-from .interfaces.isldworks import ISldWorks
+from .interfaces.isldworks import ISldWorks, IModelDoc
 
 
 class SolidWorks(ISldWorks):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.model_doc = IModelDoc()
+
+    def __enter__(self):
+        pass
+
+    def __exit__(self, exc_type, exc_value, exc_traceback):
+        pass
 
     @staticmethod
     def start(*args):

@@ -4,23 +4,13 @@ import win32com.client
 import pythoncom
 
 from ..com import COM
+from .imodeldoc import IModelDoc
 
 
 class ISldWorks:
     def __init__(self, visible=True, *args, **kwargs):
         self.isldworks = COM("SldWorks.Application")
         self.isldworks.Visible = visible
-        self.debug = 1
-
-    def __enter__(self):
-        return self.isldworks
-
-    def __exit__(self, type, value, traceback):
-        self.isldworks = None
-        return True
-
-    def __del__(self):
-        COM.instance = None
 
     @property
     def active_doc(self):
@@ -34,17 +24,16 @@ class ISldWorks:
     def startup_completed(self):
         return self.isldworks.StartupProcessCompleted
 
-    def open(self, file_path, *args, **kwargs):
+    def open(self, file_path):
         """Opens specified document
         :param file_path: The path of the file to be opened
         :type name: raw str
-
         FileName, Type, Options, Configuration, Errors, Warnings
         """
 
         self.path = file_path
         self.path = self.path.replace("\\", "/")
-        self.options = kwargs["options"]
+        self.options = None
         self.config = ""
 
         if os.path.splitext(self.path)[1] == ".SLDPRT":

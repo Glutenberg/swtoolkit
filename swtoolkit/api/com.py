@@ -19,6 +19,6 @@ class COM:
     instance = None
 
     def __new__(cls, prog_id):
-        if not COM.instance:
-            COM.instance = COM.__COM(prog_id).com
-        return COM.instance
+        if not cls.instance:
+            cls.instance = cls.__COM(prog_id).com
+        return cls.instance
