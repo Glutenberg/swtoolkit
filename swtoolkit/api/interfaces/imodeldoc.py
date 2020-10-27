@@ -7,10 +7,11 @@ from ..com import COM
 class IModelDoc:
     def __init__(self):
         self._isldworks = COM("SldWorks.Application")
+        self._instnace = self._isldworks
 
     @property
     def _imodeldoc(self):
-        return self._isldworks.ActiveDoc
+        return self._instance.ActiveDoc
 
     @property
     def extension(self):
