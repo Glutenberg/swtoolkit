@@ -8,13 +8,16 @@ from .modeldoc import ModelDoc
 class SolidWorks(ISldWorks):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.model_doc = ModelDoc()
 
     def __enter__(self):
         pass
 
     def __exit__(self, exc_type, exc_value, exc_traceback):
         pass
+
+    @property
+    def model_doc():
+        return ModelDoc()
 
     @staticmethod
     def start(*args):
