@@ -1,11 +1,16 @@
 import win32com.client
 import pythoncom
 
+from ..com import COM
+
 
 class IModelDoc:
     def __init__(self):
-        self.isldworks = COM("SldWorks.Application")
-        self.imodeldoc = self.isldworks.ActiveDoc
+        self._isldworks = COM("SldWorks.Application")
+
+    @property
+    def _imodeldoc(self):
+        return self._isldworks.ActiveDoc
 
     @property
     def extension(self):

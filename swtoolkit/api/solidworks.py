@@ -1,13 +1,14 @@
 import subprocess as sb
 import win32com.client
 
-from .interfaces.isldworks import ISldWorks, IModelDoc
+from .interfaces.isldworks import ISldWorks
+from .modeldoc import ModelDoc
 
 
 class SolidWorks(ISldWorks):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.model_doc = IModelDoc()
+        self.model_doc = ModelDoc()
 
     def __enter__(self):
         pass

@@ -4,17 +4,15 @@ import win32com.client
 import pythoncom
 
 from ..com import COM
-from .imodeldoc import IModelDoc
 
 
 class ISldWorks:
-    def __init__(self, visible=True, *args, **kwargs):
-        self.isldworks = COM("SldWorks.Application")
-        self.isldworks.Visible = visible
+    def __init__(self):
+        self._isldworks = COM("SldWorks.Application")
 
     @property
-    def active_doc(self):
-        return self.isldworks.ActiveDoc
+    def _active_doc(self):
+        return self._isldworks.ActiveDoc
 
     @property
     def frame_state(self):
@@ -22,7 +20,7 @@ class ISldWorks:
 
     @property
     def startup_completed(self):
-        return self.isldworks.StartupProcessCompleted
+        return self._isldworks.StartupProcessCompleted
 
     def open(self, file_path):
         """Opens specified document
@@ -31,33 +29,52 @@ class ISldWorks:
         FileName, Type, Options, Configuration, Errors, Warnings
         """
 
-        self.path = file_path
-        self.path = self.path.replace("\\", "/")
-        self.options = None
-        self.config = ""
+        path = file_path
+        path = path.replace("\\", "/")
+        options = None
+        config = ""
 
-        if os.path.splitext(self.path)[1] == ".SLDPRT":
-            self.type_value = 1
-        elif os.path.splitext(self.path)[1] == ".SLDASM":
-            self.type_value = 2
-        elif os.path.splitext(self.path)[1] == ".SLDDRW":
-            self.type_value = 3
+        if os.path.splitext(path)[1] == ".SLDPRT":
+            type_value = 1
+        elif os.path.splitext(path)[1] == ".SLDASM":
+            type_value = 2
+        elif os.path.splitext(path)[1] == ".SLDDRW":
+            type_value = 3
         else:
             print("Invalid Document Type")
             return
 
-        openDoc = self.isldworks.OpenDoc6
-        arg1 = win32com.client.VARIANT(pythoncom.VT_BSTR, self.path)
-        arg2 = win32com.client.VARIANT(pythoncom.VT_I4, self.type_value)
+        openDoc = self._isldworks.OpenDoc6
+        arg1 = win32com.client.VARIANT(pythoncom.VT_BSTR, path)
+        arg2 = win32com.client.VARIANT(pythoncom.VT_I4, type_value)
         arg3 = win32com.client.VARIANT(pythoncom.VT_I4, 1)
-        arg4 = win32com.client.VARIANT(pythoncom.VT_BSTR, self.config)
+        arg4 = win32com.client.VARIANT(pythoncom.VT_BSTR, config)
         arg5 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, 2)
         arg6 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, 128)
 
         openDoc(arg1, arg2, arg3, arg4, arg5, arg6)
 
-    def activate_doc(self):
-        pass
+    def activate_doc(self, *args, **kwargs):
+        """Activates a loaded document and rebuilds it as specified.
+        :param name: The name of the loaded document
+        :type name: str
+        :param use_user_preferences: True to rebuild as per the
+        swRebuildOnActivation system option; false to rebuild as per Option
+        :type use_user_preferences: bool
+        :param option: rebuild option
+        :type option: int
+        :return: model document object
+        """
+
+        ActivateDoc = self._sldworks.ActivateDoc3
+        errors = None
+        arg1 = win32com.client.VARIANT(pythoncom.VT_BSTR, args[0])
+        arg2 = win32com.client.VARIANT(pythoncom.VT_BOOL, kwargs["use_user_preference"])
+        arg3 = win32com.client.VARIANT(pythoncom.VT_I4, kwargs["option"])
+        arg4 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, errors)
+
+        ActivateDoc(arg1, arg2, arg3, arg4)
+        return arg4
 
     def close_all_documents(self):
         pass
@@ -96,19 +113,19 @@ class ISldWorks:
         pass
 
     def get_cwd(self):
-        return self.isldworks.GetCurrentWorkingDirectory()
+        return self._isldworks.GetCurrentWorkingDirectory()
 
     def get_documents(self):
         pass
 
     def exit_app(self):
-        self.isldworks.ExitApp()
+        self._isldworks.ExitApp()
 
     def activate_task_pane(self):
         pass
 
     def get_imodeler(self):
-        return self.isldworks.GetModeler()
+        return self._isldworks.GetModeler()
 
     def get_mass_properties(self):
         pass
@@ -120,4 +137,4 @@ class ISldWorks:
         pass
 
     def get_imathutility(self):
-        return self.isldworks.IGetMathUtility()
+        return self._isldworks.IGetMathUtility()
