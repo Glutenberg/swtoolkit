@@ -39,3 +39,9 @@ class SolidWorks(ISldWorks):
     def kill():
         """Force kill SLDWORKS.exe process. """
         sb.call("Taskkill /IM SLDWORKS.exe /F")
+
+    def open(self):
+        pass
+
+    def save(self):
+        pass
