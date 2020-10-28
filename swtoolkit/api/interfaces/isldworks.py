@@ -33,14 +33,6 @@ class ISldWorks:
         :type name: raw str
         FileName, Type, Options, Configuration, Errors, Warnings
         """
-        # if os.path.splitext(path)[1] == ".SLDPRT":
-        #     type_value = 1
-        # elif os.path.splitext(path)[1] == ".SLDASM":
-        #     type_value = 2
-        # elif os.path.splitext(path)[1] == ".SLDDRW":
-        #     type_value = 3
-        # else:
-        #     raise ValueError("Incompatible File Type")
 
         openDoc = self._instance.OpenDoc6
 
@@ -54,37 +46,6 @@ class ISldWorks:
         openDoc(arg1, arg2, arg3, arg4, arg5, arg6)
 
         return arg5, arg6  # (Errors, Warnings)
-
-    # def opendoc6(self, file_path):
-    #     """Opens specified document
-    #     :param file_path: The path of the file to be opened
-    #     :type name: raw str
-    #     FileName, Type, Options, Configuration, Errors, Warnings
-    #     """
-
-    #     path = file_path
-    #     path = path.replace("\\", "/")
-    #     options = None
-    #     config = ""
-
-    #     if os.path.splitext(path)[1] == ".SLDPRT":
-    #         type_value = 1
-    #     elif os.path.splitext(path)[1] == ".SLDASM":
-    #         type_value = 2
-    #     elif os.path.splitext(path)[1] == ".SLDDRW":
-    #         type_value = 3
-    #     else:
-    #         raise ValueError("Incompatible File Type")
-
-    #     openDoc = self._isldworks.OpenDoc6
-    #     arg1 = win32com.client.VARIANT(pythoncom.VT_BSTR, path)
-    #     arg2 = win32com.client.VARIANT(pythoncom.VT_I4, type_value)
-    #     arg3 = win32com.client.VARIANT(pythoncom.VT_I4, 1)
-    #     arg4 = win32com.client.VARIANT(pythoncom.VT_BSTR, config)
-    #     arg5 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, 2)
-    #     arg6 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, 128)
-
-    #     openDoc(arg1, arg2, arg3, arg4, arg5, arg6)
 
     def activate_doc(self, *args, **kwargs):
         """Activates a loaded document and rebuilds it as specified.

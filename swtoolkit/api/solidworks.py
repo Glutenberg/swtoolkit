@@ -1,4 +1,6 @@
+import os
 import subprocess as sb
+
 import win32com.client
 
 from .interfaces.isldworks import ISldWorks
@@ -40,8 +42,21 @@ class SolidWorks(ISldWorks):
         """Force kill SLDWORKS.exe process. """
         sb.call("Taskkill /IM SLDWORKS.exe /F")
 
-    def open(self):
-        pass
+    def open(self, path, configuration=str()):
+
+        options = 1
+
+        if os.path.splitext(path)[1] == ".SLDPRT":
+            type_value = 1
+        elif os.path.splitext(path)[1] == ".SLDASM":
+            type_value = 2
+        elif os.path.splitext(path)[1] == ".SLDDRW":
+            type_value = 3
+        else:
+            raise ValueError("Incompatible File Type")
+
+        err, warn = self.opendoc6(path, type_value, options, configuration)
+        return err, warn
 
     def save(self):
         pass
