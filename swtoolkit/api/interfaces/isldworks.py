@@ -98,7 +98,7 @@ class ISldWorks:
         :return: model document object
         """
 
-        ActivateDoc = self._nstance.ActivateDoc3
+        ActivateDoc = self._instance.ActivateDoc3
         errors = None
         arg1 = win32com.client.VARIANT(pythoncom.VT_BSTR, args[0])
         arg2 = win32com.client.VARIANT(pythoncom.VT_BOOL, kwargs["use_user_preference"])
