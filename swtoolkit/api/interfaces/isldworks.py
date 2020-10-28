@@ -9,6 +9,7 @@ from ..com import COM
 class ISldWorks:
     def __init__(self):
         self._isldworks = COM("SldWorks.Application")
+        self._isldworks.Visible = True
 
     @property
     def _active_doc(self):

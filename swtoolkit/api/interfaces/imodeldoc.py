@@ -7,23 +7,22 @@ from ..com import COM
 class IModelDoc:
     def __init__(self):
         self._isldworks = COM("SldWorks.Application")
-        self._instnace = self._isldworks
 
     @property
-    def _imodeldoc(self):
-        return self._instance.ActiveDoc
+    def _instance(self):
+        return self._isldworks.ActiveDoc
 
     @property
     def extension(self):
-        pass
+        return self._instance.Extension
 
     @property
     def feature_manager(self):
-        pass
+        return self._instance.FeatureManager
 
     @property
     def configuration_manager(self):
-        pass
+        return self._instance.ConfigurationManager
 
     def active_view(self):
         pass

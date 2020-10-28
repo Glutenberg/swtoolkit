@@ -6,17 +6,17 @@ from .modeldoc import ModelDoc
 
 
 class SolidWorks(ISldWorks):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self):
+        super().__init__()
 
-    def __enter__(self):
-        pass
+    # def __enter__(self):
+    #     pass
 
-    def __exit__(self, exc_type, exc_value, exc_traceback):
-        pass
+    # def __exit__(self, exc_type, exc_value, exc_traceback):
+    #     pass
 
     @property
-    def model_doc():
+    def modeldoc(self):
         return ModelDoc()
 
     @staticmethod

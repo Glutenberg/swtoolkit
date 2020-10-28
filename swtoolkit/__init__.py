@@ -4,5 +4,4 @@ __author__ = """Josh Coles"""
 __email__ = "josh@colescanada.com"
 __version__ = "0.1.0"
 
-from .api.com import COM
 from .api.solidworks import SolidWorks
