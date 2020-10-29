@@ -1,5 +1,3 @@
-import os
-
 import win32com.client
 import pythoncom
 
@@ -70,7 +68,12 @@ class ISldWorks:
         return arg4
 
     def close_all_documents(self):
-        pass
+        ''' Closes all open documents. '''
+
+        arg1 = 
+
+        self._instance.CloseAllDocuments(arg1)
+
 
     def close_doc(self, doc_name):
         pass
@@ -131,3 +134,8 @@ class ISldWorks:
 
     def get_imathutility(self):
         return self._instance.IGetMathUtility()
+
+    def loadfile4(self):
+        pass
+
+        

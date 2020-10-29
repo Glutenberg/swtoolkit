@@ -57,6 +57,3 @@ class SolidWorks(ISldWorks):
 
         err, warn = self.opendoc6(path, type_value, options, configuration)
         return err, warn
-
-    def save(self):
-        pass

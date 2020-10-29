@@ -50,3 +50,21 @@ class IModelDoc:
 
     def is_sheetmetal(self):
         pass
+
+    def save3(self, option=1):
+        """Saves active document
+        :param rebuild: Set True to rebuild part before saving
+        """
+
+        arg2_ = None
+        arg3_ = None
+
+        arg1 = win32com.client.VARIANT(pythoncom.VT_I4, option)
+        arg2 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, arg2_)
+        arg3 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, arg3_)
+
+        retval = self._instance.save3(arg1, arg2, arg3)
+        return retval
+
+    def save_bmp(self):
+        pass
