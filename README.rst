@@ -1,5 +1,5 @@
 =========
-swtoolkit
+SW Toolkit
 =========
 
 
@@ -16,7 +16,7 @@ swtoolkit
 
 
 
-Solidworks API ported for Python
+SolidWorks Toolkit for Python
 
 
 * Free software: MIT license
