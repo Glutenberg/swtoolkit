@@ -3,6 +3,7 @@ import subprocess as sb
 
 import win32com.client
 
+from ..com import COM
 from .interfaces.isldworks import ISldWorks
 from .modeldoc import ModelDoc
 
@@ -68,4 +69,5 @@ class SolidWorks(ISldWorks):
         return err, warn
 
     def quit(self):
+        # COM.instance = None
         self.exit_app()
