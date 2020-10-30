@@ -46,7 +46,14 @@ class IModelDoc:
         pass
 
     def is_weldment(self):
-        pass
+        """fuction to determine if a part is a weldment
+        Note: Exception raised if file type is not ".SLDPRT"
+        :return: True if part is a weldment
+        :rtype: bool
+        """
+
+        retval = self._instance.IsWeldment
+        return retval
 
     def is_sheetmetal(self):
         pass
@@ -56,15 +63,12 @@ class IModelDoc:
         :param rebuild: Set True to rebuild part before saving
         """
 
-        arg2_ = None
-        arg3_ = None
-
         arg1 = win32com.client.VARIANT(pythoncom.VT_I4, option)
-        arg2 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, arg2_)
-        arg3 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, arg3_)
+        arg2 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, None)
+        arg3 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, None)
 
         retval = self._instance.save3(arg1, arg2, arg3)
-        return retval
+        return retval, arg2, arg3
 
     def save_bmp(self):
         pass

@@ -18,62 +18,76 @@ class ISldWorks:
         return self._instance.ActiveDoc
 
     @property
+    def visible(self):
+        return self._isldworks.Visible
+
+    @visible.setter
+    def visible(self, state=1):
+        self._instance.Visible = state
+
+    @property
     def frame_state(self):
-        pass
+        return self._instance.FrameState
+
+    @frame_state.setter
+    def frame_state(self, state=0):
+        self._instance.FrameState = state
 
     @property
     def startup_completed(self):
         return self._instance.StartupProcessCompleted
 
     def opendoc6(self, filename, type_value, options, configuration):
-        """Opens specified document
-        :param file_path: The path of the file to be opened
-        :type name: raw str
-        FileName, Type, Options, Configuration, Errors, Warnings
-        """
+        """Opens a native solidworks document
 
-        openDoc = self._instance.OpenDoc6
+        :param filename: Filepath
+        :type filename: str
+        :param type_value: Filetype value. See Solidworks API Documentation
+        :type type_value: int
+        :param options: File load options. See Solidworks API Documentation
+        :type options: int
+        :param configuration: Name of configuration to load
+        :type configuration: str
+        :return: Error, Warnings
+        :rtype: int
+        """
 
         arg1 = win32com.client.VARIANT(pythoncom.VT_BSTR, filename.replace("\\", "/"))
         arg2 = win32com.client.VARIANT(pythoncom.VT_I4, type_value)
         arg3 = win32com.client.VARIANT(pythoncom.VT_I4, options)
         arg4 = win32com.client.VARIANT(pythoncom.VT_BSTR, configuration)
-        arg5 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, 2)
-        arg6 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, 128)
+        arg5 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, None)
+        arg6 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, None)
 
+        openDoc = self._instance.OpenDoc6
         openDoc(arg1, arg2, arg3, arg4, arg5, arg6)
 
         return arg5, arg6  # (Errors, Warnings)
 
     def activate_doc(self, *args, **kwargs):
-        """Activates a loaded document and rebuilds it as specified.
-        :param name: The name of the loaded document
-        :type name: str
-        :param use_user_preferences: True to rebuild as per the
-        swRebuildOnActivation system option; false to rebuild as per Option
-        :type use_user_preferences: bool
-        :param option: rebuild option
-        :type option: int
-        :return: model document object
-        """
+        # Activates a loaded document and rebuilds it as specified.
 
-        ActivateDoc = self._instance.ActivateDoc3
-        errors = None
         arg1 = win32com.client.VARIANT(pythoncom.VT_BSTR, args[0])
         arg2 = win32com.client.VARIANT(pythoncom.VT_BOOL, kwargs["use_user_preference"])
         arg3 = win32com.client.VARIANT(pythoncom.VT_I4, kwargs["option"])
-        arg4 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, errors)
+        arg4 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, None)
 
+        ActivateDoc = self._instance.ActivateDoc3
         ActivateDoc(arg1, arg2, arg3, arg4)
+
         return arg4
 
-    def close_all_documents(self):
-        ''' Closes all open documents. '''
+    def close_all_documents(self, include_unsaved):
+        """Closes all open documents
 
-        arg1 = 
+        :param include_unsaved: Include unsaved documents is function execution
+        :type include_unsaved: bool
+        :return: Execution feedback. True if successeful
+        :rtype: bool
+        """
 
-        self._instance.CloseAllDocuments(arg1)
-
+        arg1 = win32com.client.VARIANT(pythoncom.VT_BOOL, include_unsaved)
+        return self._instance.CloseAllDocuments(arg1)
 
     def close_doc(self, doc_name):
         pass
@@ -137,5 +151,3 @@ class ISldWorks:
 
     def loadfile4(self):
         pass
-
-        

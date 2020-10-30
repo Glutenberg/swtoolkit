@@ -17,8 +17,7 @@ class SolidWorks(ISldWorks):
     # def __exit__(self, exc_type, exc_value, exc_traceback):
     #     pass
 
-    @property
-    def modeldoc(self):
+    def get_model(self, name=None):
         return ModelDoc()
 
     @staticmethod
@@ -42,9 +41,19 @@ class SolidWorks(ISldWorks):
         """Force kill SLDWORKS.exe process. """
         sb.call("Taskkill /IM SLDWORKS.exe /F")
 
-    def open(self, path, configuration=str()):
+    def open(self, path, options=1, configuration=str()):
+        """Opens a documents
 
-        options = 1
+        :param path: File path
+        :type path: str
+        :param options: File load options, defaults to 1
+        :type options: int, optional
+        :param configuration: Specifies configuration to load, defaults to str()
+        :type configuration: str, optional
+        :raises ValueError: File must be solidworks native
+        :return: Error, Warning
+        :rtype: int
+        """
 
         if os.path.splitext(path)[1] == ".SLDPRT":
             type_value = 1
@@ -57,3 +66,6 @@ class SolidWorks(ISldWorks):
 
         err, warn = self.opendoc6(path, type_value, options, configuration)
         return err, warn
+
+    def quit(self):
+        self.exit_app()
