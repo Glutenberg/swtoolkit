@@ -2,6 +2,7 @@ import win32com.client
 import pythoncom
 
 from ..com import COM
+from ..modeldocextension import ModelDocExtension
 
 
 class IModelDoc:
@@ -11,7 +12,7 @@ class IModelDoc:
 
     @property
     def extension(self):
-        return self.ModelDocExtension(self._instance)
+        return ModelDocExtension(self._instance)
 
     @property
     def feature_manager(self):
