@@ -7,7 +7,6 @@ from ..com import COM
 class ISldWorks:
     def __init__(self):
         self._isldworks = COM("SldWorks.Application")
-        self._isldworks.Visible = True
 
     @property
     def _instance(self):
@@ -19,7 +18,7 @@ class ISldWorks:
 
     @property
     def visible(self):
-        return self._isldworks.Visible
+        return self._instance.Visible
 
     @visible.setter
     def visible(self, state=1):
@@ -37,7 +36,7 @@ class ISldWorks:
     def startup_completed(self):
         return self._instance.StartupProcessCompleted
 
-    def opendoc6(self, filename, type_value, options, configuration):
+    def _opendoc6(self, filename, type_value, options, configuration):
         """Opens a native solidworks document
 
         :param filename: Filepath

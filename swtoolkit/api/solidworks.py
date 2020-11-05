@@ -3,7 +3,7 @@ import subprocess as sb
 
 import win32com.client
 
-from ..com import COM
+# from ..com import COM
 from .interfaces.isldworks import ISldWorks
 from .modeldoc import ModelDoc
 
@@ -18,7 +18,7 @@ class SolidWorks(ISldWorks):
     # def __exit__(self, exc_type, exc_value, exc_traceback):
     #     pass
 
-    def get_model(self, name=None):
+    def get_model(self):
         return ModelDoc()
 
     @staticmethod
@@ -65,7 +65,7 @@ class SolidWorks(ISldWorks):
         else:
             raise ValueError("Incompatible File Type")
 
-        err, warn = self.opendoc6(path, type_value, options, configuration)
+        err, warn = self._opendoc6(path, type_value, options, configuration)
         return err, warn
 
     def quit(self):

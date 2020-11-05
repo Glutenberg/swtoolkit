@@ -7,14 +7,11 @@ from ..com import COM
 class IModelDoc:
     def __init__(self):
         self._isldworks = COM("SldWorks.Application")
-
-    @property
-    def _instance(self):
-        return self._isldworks.ActiveDoc
+        self._instance = self._isldworks.ActiveDoc
 
     @property
     def extension(self):
-        return self._instance.Extension
+        return self.ModelDocExtension(self._instance)
 
     @property
     def feature_manager(self):
@@ -45,6 +42,7 @@ class IModelDoc:
     def set_summaryinfo(self):
         pass
 
+    @property
     def is_weldment(self):
         """fuction to determine if a part is a weldment
         Note: Exception raised if file type is not ".SLDPRT"
