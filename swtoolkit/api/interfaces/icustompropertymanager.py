@@ -1,5 +1,9 @@
+import win32com.client
+import pythoncom
+
+
 class ICustomPropertyManager:
-    def __init__(self, parent, config_name=str()):
+    def __init__(self, parent, config_name=""):
         self._instance = parent.CustomPropertyManager(config_name)
 
     @property
@@ -27,7 +31,17 @@ class ICustomPropertyManager:
         pass
 
     def get_all3(self):
-        pass
+
+        arg1 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_VARIANT, None)
+        arg2 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_VARIANT, None)
+        arg3 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_VARIANT, None)
+        arg4 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_VARIANT, None)
+        arg5 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_VARIANT, None)
+
+        GetAll3 = self._instance.GetAll3
+        GetAll3(arg1, arg2, arg3, arg4, arg5)
+
+        return arg1, arg2, arg3, arg4, arg5
 
     def get_type2(self):
         pass
