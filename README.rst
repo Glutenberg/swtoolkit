@@ -1,3 +1,6 @@
+.. image:: images/logo_swtoolkit.png
+   :width: 600
+
 =========
 SW Toolkit
 =========
@@ -13,10 +16,10 @@ SW Toolkit
         :target: https://swtoolkit.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
-
-
-
 SolidWorks Toolkit for Python
+
+.. image:: images/intro_code.png
+   :width: 600
 
 
 * Free software: MIT license
