@@ -125,7 +125,7 @@ class ISldWorks:
         return self._instance.GetCurrentWorkingDirectory()
 
     def get_documents(self):
-        pass
+        return self._instance.GetDocuments
 
     def exit_app(self):
         self._instance.ExitApp()
