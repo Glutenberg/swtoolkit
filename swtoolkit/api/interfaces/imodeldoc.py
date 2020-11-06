@@ -43,6 +43,27 @@ class IModelDoc:
     def set_summaryinfo(self):
         pass
 
+    def get_path_name(self):
+        return self._instance.GetPathName
+
+    def get_title(self):
+        return self._instance.GetTitle
+
+    def get_type(self):
+        return self._instance.GetType
+
+    def get_update_stamp(self):
+        return self._instance.GetUpdateStamp
+
+    def get_units(self):
+        return self._instance.GetUnits
+
+    def get_user_units(self, unit_type):
+        return self._instance.GetUserUnit(unit_type)
+
+    def get_save_flag(self):
+        return self._instance.GetSaveFlag
+
     @property
     def is_weldment(self):
         """fuction to determine if a part is a weldment
@@ -71,3 +92,6 @@ class IModelDoc:
 
     def save_bmp(self):
         pass
+
+    def view_zoom_to_fit2(self):
+        return self._instance.ViewZoomtofit2
