@@ -1,10 +1,5 @@
 .. image:: docs/images/logo_swtoolkit.png
-   :width: 600
-
-=========
-SW Toolkit
-=========
-
+   :width: 450
 
 .. image:: https://img.shields.io/pypi/v/swtoolkit.svg
         :target: https://pypi.python.org/pypi/swtoolkit
