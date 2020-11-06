@@ -1,4 +1,4 @@
-.. image:: images/logo_swtoolkit.png
+.. image:: docs/images/logo_swtoolkit.png
    :width: 600
 
 =========
@@ -18,7 +18,7 @@ SW Toolkit
 
 SolidWorks Toolkit for Python
 
-.. image:: images/intro_code.png
+.. image:: docs/images/intro_code.png
    :width: 600
 
 
