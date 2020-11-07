@@ -2,8 +2,14 @@ from .interfaces.imodeldoc import IModelDoc
 
 
 class ModelDoc(IModelDoc):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}({self.parent},{self.get_title()})"
+
+    def __str__(self):
+        return self.get_title()
 
     def get_custominfo(self):
         pass

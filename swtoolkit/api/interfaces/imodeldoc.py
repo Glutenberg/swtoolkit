@@ -6,9 +6,15 @@ from ..modeldocextension import ModelDocExtension
 
 
 class IModelDoc:
-    def __init__(self):
-        self._isldworks = COM("SldWorks.Application")
-        self._instance = self._isldworks.ActiveDoc
+    def __init__(self, parent):
+        self.parent = parent
+
+    @property
+    def _instance(self):
+        if self.parent is not None:
+            return self.parent
+        else:
+            return COM("SldWorks.Application").ActiveDoc
 
     @property
     def extension(self):

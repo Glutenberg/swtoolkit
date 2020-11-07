@@ -69,5 +69,7 @@ class SolidWorks(ISldWorks):
         return err, warn
 
     def quit(self):
-        # COM.instance = None
         self.exit_app()
+
+    def get_documents(self):
+        return [ModelDoc(parent) for parent in self._get_documents()]
