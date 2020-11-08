@@ -88,8 +88,9 @@ class ISldWorks:
         arg1 = win32com.client.VARIANT(pythoncom.VT_BOOL, include_unsaved)
         return self._instance.CloseAllDocuments(arg1)
 
-    def close_doc(self, doc_name):
-        pass
+    def close_doc(self, name):
+        arg = win32com.client.VARIANT(pythoncom.VT_BSTR, name)
+        return self._instance.CloseDoc(arg)
 
     def new_document(self, template_name, paper_size, width, height):
         pass

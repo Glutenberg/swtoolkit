@@ -35,5 +35,8 @@ class ModelDoc(IModelDoc):
     def set_configinfo(self):
         pass
 
+    def set_summaryinfo(self):
+        pass
+
     def set_summaryinfo(self, field_name, field_value):
         self._instance.SummaryInfo(field_name, field_value)

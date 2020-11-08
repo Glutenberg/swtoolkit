@@ -72,7 +72,7 @@ class SolidWorks(ISldWorks):
             raise ValueError("Incompatible File Type")
 
         err, warn = self._opendoc6(path, type_value, options, configuration)
-        return err, warn
+        return err.value, warn.value
 
     def quit(self):
         self.exit_app()

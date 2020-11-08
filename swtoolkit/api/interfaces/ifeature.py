@@ -51,5 +51,5 @@ class IFeature:
 
     def get_box(self):
         arg = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_VARIANT, None)
-        retval = self._instance.GetBox(arg)
-        return arg, retval
+        self._instance.GetBox(arg)
+        return arg.value

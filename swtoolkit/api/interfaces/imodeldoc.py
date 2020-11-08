@@ -32,24 +32,6 @@ class IModelDoc:
     def active_view(self):
         pass
 
-    def get_custominfo(self):
-        pass
-
-    def get_configinfo(self):
-        pass
-
-    def get_summaryinfo(self):
-        pass
-
-    def set_custominfo(self):
-        pass
-
-    def set_configinfo(self):
-        pass
-
-    def set_summaryinfo(self):
-        pass
-
     def get_path_name(self):
         return self._instance.GetPathName
 
@@ -97,8 +79,37 @@ class IModelDoc:
         retval = self._instance.save3(arg1, arg2, arg3)
         return retval, arg2, arg3
 
-    def save_bmp(self):
-        pass
+    def save_bmp(self, file_name_in, width_in, height_in):
+
+        arg1 = win32com.client.VARIANT(pythoncom.VT_BSTR, file_name_in)
+        arg2 = win32com.client.VARIANT(pythoncom.VT_I4, width_in)
+        arg3 = win32com.client.VARIANT(pythoncom.VT_I4, height_in)
+
+        return self._instance.SaveBMP(arg1, arg2, arg3)
 
     def view_zoom_to_fit2(self):
-        return self._instance.ViewZoomtofit2
+        return self._instance.ViewZoomtofit2()
+
+    def view_zoom_in(self):
+        return self._instance.ViewZoomin()
+
+    def view_zoom_out(self):
+        return self._instance.ViewZoomout()
+
+    def force_quit(self):
+        return self._instance.Quit()
+
+    def add_configuration3(self, name, comment, alternate_name, options):
+
+        arg1 = win32com.client.VARIANT(pythoncom.VT_BSTR, name)
+        arg2 = win32com.client.VARIANT(pythoncom.VT_BSTR, comment)
+        arg3 = win32com.client.VARIANT(pythoncom.VT_BSTR, alternate_name)
+        arg4 = win32com.client.VARIANT(pythoncom.VT_I4, options)
+
+        AddConfiguration = self._instance.AddConfiguration3
+        return AddConfiguration(arg1, arg2, arg3, arg4)
+
+    def show_named_view2(self, view_name, view_id):
+        arg1 = win32com.client.VARIANT(pythoncom.VT_BSTR, view_name)
+        arg2 = win32com.client.VARIANT(pythoncom.VT_I4, view_id)
+        return self._instance.ShowNamedView2(arg1, arg2)
