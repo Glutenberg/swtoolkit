@@ -44,6 +44,10 @@ class SolidWorks(ISldWorks):
         """Force kill SLDWORKS.exe process. """
         sb.call("Taskkill /IM SLDWORKS.exe /F")
 
+    @property
+    def process_id(self):
+        return self.get_process_id()
+
     def open(self, path, options=1, configuration=str()):
         """Opens a documents
 
