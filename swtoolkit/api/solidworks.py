@@ -3,7 +3,6 @@ import subprocess as sb
 
 import win32com.client
 
-# from ..com import COM
 from .interfaces.isldworks import ISldWorks
 from .modeldoc import ModelDoc
 
@@ -12,14 +11,17 @@ class SolidWorks(ISldWorks):
     def __init__(self):
         super().__init__()
 
+    def __repr__(self):
+        return f"<{self.__class__.__name__}><{self.get_process_id()}>"
+
+    def __str__(self):
+        return f"{self.__class__.__name__}"
+
     # def __enter__(self):
     #     pass
 
     # def __exit__(self, exc_type, exc_value, exc_traceback):
     #     pass
-
-    def get_model(self):
-        return ModelDoc()
 
     @staticmethod
     def start(*args):
@@ -70,6 +72,9 @@ class SolidWorks(ISldWorks):
 
     def quit(self):
         self.exit_app()
+
+    def get_model(self):
+        return ModelDoc()
 
     def get_documents(self):
         return [ModelDoc(parent) for parent in self._get_documents()]

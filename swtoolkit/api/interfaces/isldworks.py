@@ -145,6 +145,9 @@ class ISldWorks:
     def get_template_sizes(self):
         pass
 
+    def get_process_id(self):
+        return self._instance.GetProcessID
+
     def get_imathutility(self):
         return self._instance.IGetMathUtility()
 

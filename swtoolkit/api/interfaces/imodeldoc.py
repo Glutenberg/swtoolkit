@@ -3,6 +3,7 @@ import pythoncom
 
 from ..com import COM
 from ..modeldocextension import ModelDocExtension
+from ..featuremanager import FeatureManager
 
 
 class IModelDoc:
@@ -22,7 +23,7 @@ class IModelDoc:
 
     @property
     def feature_manager(self):
-        return self._instance.FeatureManager
+        return FeatureManager(self._instance)
 
     @property
     def configuration_manager(self):

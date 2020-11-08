@@ -6,10 +6,19 @@ class ModelDoc(IModelDoc):
         super().__init__(parent)
 
     def __repr__(self):
-        return f"{self.__class__.__name__}({self.parent},{self.get_title()})"
+        return f"{self.__class__.__name__} <{self.get_title()}>"
 
     def __str__(self):
         return self.get_title()
+
+    @property
+    def title(self):
+        return self.get_title()
+
+    # TODO: Output Type as String
+    @property
+    def type_(self):
+        return self.get_type()
 
     def get_custominfo(self):
         pass
@@ -28,9 +37,3 @@ class ModelDoc(IModelDoc):
 
     def set_summaryinfo(self, field_name, field_value):
         self._instance.SummaryInfo(field_name, field_value)
-
-    # def __call__(self, name=None):
-    #     if name is None:
-    #         super()._modeldoc = super()._imodeldoc()
-    #     else:
-    #         pass
