@@ -16,13 +16,16 @@
 
 SW ToolKit is a SolidWorks Toolkit for Python
 =============================================
-*SW ToolKit* allows you to leverage Python to quickly develop powerful scripts and programs to automate your SolidWorks workflow.
+**SW ToolKit** allows you to leverage Python to quickly develop powerful scripts and programs to automate your SolidWorks workflow.
 
 * Free software: MIT license
 * Documentation: https://swtoolkit.readthedocs.io.
 
-Features
---------
+Use Cases:
+----------
+* Automate custom property reading and writing to aid in Bill of Material preparation
+* Bulk collect model data for design and project analysis.
+* Link dimensions and variables to calculated values in scripts and interactive python notebooks
 
 Installation
 ------------
@@ -61,6 +64,11 @@ Interacting with Features
         feature = features[0] # Returns the first feature in the model
         feature.name 
         feature.id_
+
+.. Features
+.. --------
+.. Future
+.. ^^^^^^
 
 Credits
 -------
