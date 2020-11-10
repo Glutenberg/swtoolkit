@@ -73,7 +73,23 @@ class SolidWorks(ISldWorks):
     @property
     def process_id(self):
         """Returns SolidWorks process ID"""
-        return self.get_process_id()
+        return self._get_process_id()
+
+    @property
+    def visible(self):
+        return self._get_visible()
+
+    @visible.setter
+    def visible(self, state=True):
+        return self._set_visible(state)
+
+    @property
+    def frame_state(self):
+        return self._get_frame_state()
+
+    @frame_state.setter
+    def frame_state(self, state):
+        self._set_frame_state(state)
 
     def open(self, path, options=1, configuration=str()):
         """Opens a native SolidWorks documents

@@ -1,3 +1,9 @@
+""" isldworks is a direct reimplementation of the ISldWorks interface
+in the SolidWorks API.
+
+http://help.solidworks.com/2020/english/api/sldworksapi/SOLIDWORKS.Interop.sldworks~SOLIDWORKS.Interop.sldworks.ISldWorks.html
+"""
+
 import win32com.client
 import pythoncom
 
@@ -12,24 +18,25 @@ class ISldWorks:
     def _instance(self):
         return self._isldworks
 
-    @property
     def _active_doc(self):
         return self._instance.ActiveDoc
 
-    @property
-    def visible(self):
+    def _get_visible(self):
+        """Gets the visibility of the SolidWorks session."""
         return self._instance.Visible
 
-    @visible.setter
-    def visible(self, state=1):
+    def _set_visible(self, state: bool):
+        """Sets the visibility of the SolidWorks session.
+
+        Args:
+            state (bool): The visibility state. True is visible
+        """
         self._instance.Visible = state
 
-    @property
-    def frame_state(self):
+    def _get_frame_state(self):
         return self._instance.FrameState
 
-    @frame_state.setter
-    def frame_state(self, state=0):
+    def _set_frame_state(self, state: int):
         self._instance.FrameState = state
 
     @property
@@ -37,19 +44,7 @@ class ISldWorks:
         return self._instance.StartupProcessCompleted
 
     def _opendoc6(self, filename, type_value, options, configuration):
-        """Opens a native solidworks document
-
-        :param filename: Filepath
-        :type filename: str
-        :param type_value: Filetype value. See Solidworks API Documentation
-        :type type_value: int
-        :param options: File load options. See Solidworks API Documentation
-        :type options: int
-        :param configuration: Name of configuration to load
-        :type configuration: str
-        :return: Error, Warnings
-        :rtype: int
-        """
+        """Opens a native solidworks document """
 
         arg1 = win32com.client.VARIANT(pythoncom.VT_BSTR, filename.replace("\\", "/"))
         arg2 = win32com.client.VARIANT(pythoncom.VT_I4, type_value)
@@ -146,7 +141,7 @@ class ISldWorks:
     def get_template_sizes(self):
         pass
 
-    def get_process_id(self):
+    def _get_process_id(self):
         return self._instance.GetProcessID
 
     def get_imathutility(self):
