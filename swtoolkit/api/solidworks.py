@@ -43,7 +43,8 @@ class SolidWorks(ISldWorks):
             version of SolidWorks installed on your machine DO NOT enter an
             arguement
 
-        Examples: SolidWorks.start(20)
+        Examples:
+            SolidWorks.start(20)
         """
 
         if not args:
@@ -64,7 +65,7 @@ class SolidWorks(ISldWorks):
         is independ of the SolidWorks API and terminates the SolidWorks session
         killing the the SLDWORKS.exe process.
 
-        This method should be used in the case that SolidWorks is not
+        'kill()' should be used in the case that SolidWorks is not
         responding. The prefered method for shutting down the SolidWorks
         session is 'shutdown()'
         """
