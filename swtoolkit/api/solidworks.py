@@ -135,7 +135,7 @@ class SolidWorks(ISldWorks):
         """Returns the model document currently active in the SolidWorks session
 
         Returns:
-            ModelDoc: A SolidWorks model or document
+            :class:`swtoolkit.api.ModelDoc`: A SolidWorks model or document
         """
         return ModelDoc()
 
@@ -144,7 +144,7 @@ class SolidWorks(ISldWorks):
         session
 
         Returns:
-            List of ModelDoc: A list of all the model/documents loaded in the
-            SolidWorks session
+            List of :class:`swtoolkit.api.ModelDoc`: A list of all the
+            model/documents loaded in the SolidWorks session
         """
         return [ModelDoc(system_object) for system_object in self._get_documents()]
