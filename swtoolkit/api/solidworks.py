@@ -7,23 +7,26 @@ import win32com.client
 
 from .interfaces.isldworks import ISldWorks
 from .modeldoc import ModelDoc
+from .enums.enums import DocumentTypes, OpenDocOptions
 
 
 class SolidWorks(ISldWorks):
     """SolidWorks creates an interface to the current primary SolidWorks
     session.
 
-    If no SolidWorks session currently exist, a session will be created upon
-    instantiation. Note that this session will be running in the background and
-    its existiance will not be apparent. To make this session visible, set its
-    visibility attribute :attr:'visible' to True.
+    Note:
+        If no SolidWorks session currently exist, a session will be created
+        upon instantiation. Note that this session will be running in the
+        background and its existiance will not be apparent. To make this
+        session visible, set its visibility attribute :attr:'visible' to True.
+
     """
 
     def __init__(self):
         super().__init__()
 
     def __repr__(self):
-        return f"<{self.__class__.__name__}><{self.get_process_id()}>"
+        return f"<{self.__class__.__name__}><{self.pid}>"
 
     def __str__(self):
         return f"{self.__class__.__name__}"
@@ -38,13 +41,13 @@ class SolidWorks(ISldWorks):
         user preferences loaded is desired. Launch the session using this
         static method proir to instantiating an instance of :class:'SolidWorks'
 
-        Args: version (int, optional): Last 2-digits of the year of the
+        Args:
+            version (int, optional): Last 2-digits of the year of the
             SolidWorks instance you would like to use. If there is only one
             version of SolidWorks installed on your machine DO NOT enter an
             arguement
 
-        Examples:
-            SolidWorks.start(20)
+        Examples: SolidWorks.start(20)
         """
 
         if not args:
@@ -65,14 +68,14 @@ class SolidWorks(ISldWorks):
         is independ of the SolidWorks API and terminates the SolidWorks session
         killing the the SLDWORKS.exe process.
 
-        'kill()' should be used in the case that SolidWorks is not
-        responding. The prefered method for shutting down the SolidWorks
-        session is 'shutdown()'
+        'kill()' should be used in the case that SolidWorks is not responding.
+        The prefered method for shutting down the SolidWorks session is
+        'shutdown()'
         """
         sb.call("Taskkill /IM SLDWORKS.exe /F")
 
     @property
-    def process_id(self):
+    def pid(self):
         """Returns SolidWorks process ID"""
         return self._get_process_id()
 
@@ -81,7 +84,7 @@ class SolidWorks(ISldWorks):
         return self._get_visible()
 
     @visible.setter
-    def visible(self, state=True):
+    def visible(self, state: bool = True):
         return self._set_visible(state)
 
     @property
@@ -92,7 +95,7 @@ class SolidWorks(ISldWorks):
     def frame_state(self, state):
         self._set_frame_state(state)
 
-    def open(self, path, options=1, configuration=str()):
+    def open(self, path: str, options: str = "silent", configuration: str = str()):
         """Opens a native SolidWorks documents
 
         Args:
@@ -104,24 +107,25 @@ class SolidWorks(ISldWorks):
             configuration
 
         Raises:
-            ValueError: File must me a SolidWorks native file. Acceptable file
-            extensions include [.SLDPRT, .SLDASM, .SLDDRW]
+            ValueError: File must me a SolidWorks native file. Acceptable
+            file extensions include [.SLDPRT, .SLDASM, .SLDDRW]
 
         Returns:
-            Error: Error raised while opening the document
-            Warning: Warnings returned while opening the document
+            Error: Error raised while opening the document Warning:
+            Warnings returned while opening the document
         """
 
         if os.path.splitext(path)[1] == ".SLDPRT":
-            type_value = 1
+            type_value = DocumentTypes.PART.value
         elif os.path.splitext(path)[1] == ".SLDASM":
-            type_value = 2
+            type_value = DocumentTypes.ASSEMBLY.value
         elif os.path.splitext(path)[1] == ".SLDDRW":
-            type_value = 3
+            type_value = DocumentTypes.DRAWING.value
         else:
             raise ValueError("Incompatible File Type")
 
-        err, warn = self._opendoc6(path, type_value, options, configuration)
+        _options = OpenDocOptions[options.upper().replace(" ", "_")].value
+        err, warn = self._opendoc6(path, type_value, _options, configuration)
         return err.value, warn.value
 
     def shutdown(self):

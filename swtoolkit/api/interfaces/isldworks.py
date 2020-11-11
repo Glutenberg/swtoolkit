@@ -43,7 +43,9 @@ class ISldWorks:
     def startup_completed(self):
         return self._instance.StartupProcessCompleted
 
-    def _opendoc6(self, filename, type_value, options, configuration):
+    def _opendoc6(
+        self, filename: str, type_value: int, options: int, configuration: str
+    ):
         """Opens a native solidworks document """
 
         arg1 = win32com.client.VARIANT(pythoncom.VT_BSTR, filename.replace("\\", "/"))
@@ -71,7 +73,7 @@ class ISldWorks:
 
         return arg4
 
-    def close_all_documents(self, include_unsaved):
+    def close_all_documents(self, include_unsaved: bool):
         """Closes all open documents
 
         :param include_unsaved: Include unsaved documents is function execution

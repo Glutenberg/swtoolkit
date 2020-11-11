@@ -19,6 +19,12 @@ class IModelDoc:
 
     @property
     def extension(self):
+        """Exposes additional :class:`ModelDoc` methods and attributes
+
+        Returns:
+            ModelDocExtension: ModelDocExtension exposes additional
+            :class:`ModelDoc` methods and attributes
+        """
         return ModelDocExtension(self._instance)
 
     @property
@@ -32,13 +38,16 @@ class IModelDoc:
     def active_view(self):
         pass
 
-    def get_path_name(self):
+    def _get_path_name(self):
+        """Returns the model or document path name."""
         return self._instance.GetPathName
 
-    def get_title(self):
+    def _get_title(self):
+        """Returns the model or document title."""
         return self._instance.GetTitle
 
-    def get_type(self):
+    def _get_type(self):
+        """Returns the model or document type."""
         return self._instance.GetType
 
     def get_update_stamp(self):
@@ -53,11 +62,28 @@ class IModelDoc:
     def get_save_flag(self):
         return self._instance.GetSaveFlag
 
+    def get_custominfo(self):
+        pass
+
+    def get_configinfo(self):
+        pass
+
+    def get_summaryinfo(self):
+        pass
+
+    def set_custominfo(self):
+        pass
+
+    def set_configinfo(self):
+        pass
+
+    def set_summaryinfo(self, field_name, field_value):
+        self._instance.SummaryInfo(field_name, field_value)
+
     @property
     def is_weldment(self):
-        """fuction to determine if a part is a weldment
-        Note: Exception raised if file type is not ".SLDPRT"
-        :return: True if part is a weldment
+        """fuction to determine if a part is a weldment Note: Exception raised
+        if file type is not ".SLDPRT" :return: True if part is a weldment
         :rtype: bool
         """
 

@@ -1,4 +1,5 @@
 from .interfaces.imodeldoc import IModelDoc
+from .enums.enum_options import DocumentTypes, StandardViews, SaveAsOptions
 
 
 class ModelDoc(IModelDoc):
@@ -6,37 +7,50 @@ class ModelDoc(IModelDoc):
         super().__init__(parent)
 
     def __repr__(self):
-        return f"{self.__class__.__name__} <{self.get_title()}>"
+        return f"{self.__class__.__name__} <{self.title}>"
 
     def __str__(self):
-        return self.get_title()
+        return self.title
 
     @property
     def title(self):
-        return self.get_title()
+        """Returns the title of the document or model."""
+        return self._get_title()
 
-    # TODO: Output Type as String
     @property
-    def type_(self):
-        return self.get_type()
+    def type(self):
+        """Returns the document or model type."""
+        return DocumentTypes(self._get_type())
 
-    def get_custominfo(self):
-        pass
+    @property
+    def path(self):
+        """Returns the path of the document or model."""
+        return self._get_path_name()
 
-    def get_configinfo(self):
-        pass
+    def save(self, options: str = "silent"):
+        """Saves the current ModelDoc object
 
-    def get_summaryinfo(self):
-        pass
+        Args:
+            options (str, optional): Save as options. Defaults to "silent".
 
-    def set_custominfo(self):
-        pass
+        Returns:
+            Tuple: True if save is successful, followed by Errors and Warnings
+        """
+        _options = SaveAsOptions[options.upper().replace(" ", "_")].value
+        retval, err, warn = self.save3(_options)
+        return retval, err.value, warn.value
 
-    def set_configinfo(self):
-        pass
+    def set_view(self, view_name: str, zoom_to_fit: bool = False):
+        """Allows the model view to be selected
 
-    def set_summaryinfo(self):
-        pass
+        Args:
+            view_name (str): Name of the view to show.
+            zoom_to_fit (bool, optional): Fits model to viewport if True.
 
-    def set_summaryinfo(self, field_name, field_value):
-        self._instance.SummaryInfo(field_name, field_value)
+        Example:
+            model.show_view('Isometric')
+        """
+        _view_id = StandardViews[view_name.upper().replace(" ", "_")].value
+        self.show_named_view2(str(), _view_id)
+        if zoom_to_fit:
+            self.view_zoom_to_fit2()
