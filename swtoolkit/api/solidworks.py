@@ -7,7 +7,7 @@ import win32com.client
 
 from .interfaces.isldworks import ISldWorks
 from .modeldoc import ModelDoc
-from .enums.enums import DocumentTypes, OpenDocOptions
+from .enums.enum_options import DocumentTypes, OpenDocOptions
 
 
 class SolidWorks(ISldWorks):
