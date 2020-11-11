@@ -13,7 +13,7 @@ class ModelDoc(IModelDoc):
         return self.title
 
     @property
-    def title(self):
+    def title(self) -> str:
         """Returns the title of the document or model."""
         return self._get_title()
 
@@ -23,7 +23,7 @@ class ModelDoc(IModelDoc):
         return DocumentTypes(self._get_type())
 
     @property
-    def path(self):
+    def path(self) -> str:
         """Returns the path of the document or model."""
         return self._get_path_name()
 
@@ -53,4 +53,8 @@ class ModelDoc(IModelDoc):
         _view_id = StandardViews[view_name.upper().replace(" ", "_")].value
         self.show_named_view2(str(), _view_id)
         if zoom_to_fit:
-            self.view_zoom_to_fit2()
+            self.zoom_to_fit()
+
+    def zoom_to_fit(self):
+        """Fits model to viewport. """
+        self.view_zoom_to_fit2()
