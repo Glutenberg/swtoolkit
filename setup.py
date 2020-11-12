@@ -16,6 +16,9 @@ requirements = [
 
 setup_requirements = [
     "pytest-runner",
+    "sphinxcontrib-napoleon",
+    "sphinx_rtd_theme",
+    "sphinx-autoapi",
 ]
 
 test_requirements = [
