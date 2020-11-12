@@ -22,7 +22,7 @@ import sys
 
 sys.path.insert(0, os.path.abspath(".."))
 
-import swtoolkit
+# import swtoolkit
 import sphinx_rtd_theme
 
 # -- General configuration ---------------------------------------------
