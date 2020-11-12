@@ -24,8 +24,6 @@ Welcome to SW ToolKit's documentation!
    authors
    history
 
-.. .. automodule:: swtoolkit.api.solidworks
-..    :members:
 
 Indices and tables
 ==================
