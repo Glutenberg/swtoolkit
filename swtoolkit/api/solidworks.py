@@ -111,8 +111,8 @@ class SolidWorks(ISldWorks):
             file extensions include [.SLDPRT, .SLDASM, .SLDDRW]
 
         Returns:
-            Error: Error raised while opening the document Warning:
-            Warnings returned while opening the document
+            Error: Error raised while opening the document
+            Warning: Warnings returned while opening the document
         """
 
         if os.path.splitext(path)[1] == ".SLDPRT":
