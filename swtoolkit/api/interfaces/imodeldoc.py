@@ -7,15 +7,16 @@ from ..featuremanager import FeatureManager
 
 
 class IModelDoc:
-    def __init__(self, parent):
-        self.parent = parent
+    def __init__(self, system_object):
+        self.system_opbject = system_object
 
     @property
     def _instance(self):
-        if self.parent is not None:
-            return self.parent
+        if self.system_object is not None:
+            return self.system_object
         else:
-            return COM("SldWorks.Application").ActiveDoc
+            self.system_object = COM("SldWorks.Application").ActiveDoc
+            return self.system_opbject
 
     @property
     def extension(self):
