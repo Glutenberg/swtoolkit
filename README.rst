@@ -1,18 +1,29 @@
-.. image:: docs/images/logo_swtoolkit.png
-   :width: 300
+.. image:: /_static/logo_swtoolkit.png
+        :alt: SW ToolKit. SolidWorks ToolKit for Python
+        :align: center
+        :width: 600
+
+.. This '|' generates a blank line to avoid sticking the logo to the
+   section.
+
+|
 
 .. image:: https://img.shields.io/pypi/v/swtoolkit.svg
         :target: https://pypi.python.org/pypi/swtoolkit
+        :alt: PyPi Version
 
 .. image:: https://img.shields.io/travis/Glutenberg/swtoolkit.svg
         :target: https://travis-ci.com/Glutenberg/swtoolkit
+        :alt: Build Status
 
 .. image:: https://readthedocs.org/projects/swtoolkit/badge/?version=latest
         :target: https://swtoolkit.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
-.. image:: docs/images/intro_code.png
-   :width: 600
+.. image:: /_static/intro_code.png
+        :alt:
+        :width: 600
+        :align: center
 
 SolidWorks Toolkit for Python
 =============================

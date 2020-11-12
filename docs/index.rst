@@ -1,17 +1,31 @@
-Welcome to swtoolkit's documentation!
+
+.. image:: /_static/logo_swtoolkit.png
+   :alt: SW ToolKit. SolidWorks ToolKit for Python
+   :align: center
+   :width: 600
+
+.. This '|' generates a blank line to avoid sticking the logo to the
+   section.
+
+|
+
+Welcome to SW ToolKit's documentation!
 ======================================
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-   readme
+   introduction
    installation
    usage
    modules
    contributing
    authors
    history
+
+.. .. automodule:: swtoolkit.api.solidworks
+..    :members:
 
 Indices and tables
 ==================
