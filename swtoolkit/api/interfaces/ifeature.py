@@ -15,7 +15,7 @@ class IFeature:
         return self._instance.Description
 
     @property
-    def id_(self):
+    def identity(self):
         return self._instance.GetID
 
     @property
