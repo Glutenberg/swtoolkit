@@ -1,10 +1,11 @@
+from .assemblydoc import AssemblyDoc
 from .interfaces.imodeldoc import IModelDoc
 from .enums.enum_options import DocumentTypes, StandardViews, SaveAsOptions
 
 
 class ModelDoc(IModelDoc):
-    def __init__(self, parent=None):
-        super().__init__(parent)
+    def __init__(self, system_object=None):
+        super().__init__(system_object)
 
     def __repr__(self):
         return f"{self.__class__.__name__} <{self.title}>"
@@ -40,19 +41,23 @@ class ModelDoc(IModelDoc):
         retval, err, warn = self.save3(_options)
         return retval, err.value, warn.value
 
-    def set_view(self, view_name: str, zoom_to_fit: bool = False):
+    def get_assembly(self):
+        if self.type.value == 2:
+            return AssemblyDoc(self._instance)
+
+    def set_view(self, view_name: str, fit: bool = False):
         """Allows the model view to be selected
 
         Args:
             view_name (str): Name of the view to show.
-            zoom_to_fit (bool, optional): Fits model to viewport if True.
+            fit (bool, optional): Fits model to viewport if True.
 
         Example:
             model.show_view('Isometric')
         """
         _view_id = StandardViews[view_name.upper().replace(" ", "_")].value
         self.show_named_view2(str(), _view_id)
-        if zoom_to_fit:
+        if fit:
             self.zoom_to_fit()
 
     def zoom_to_fit(self):

@@ -1,0 +1,13 @@
+from .component import Component
+from .interfaces.iassemblydoc import IAssemblyDoc
+
+
+class AssemblyDoc(IAssemblyDoc):
+    def __init__(self, system_object):
+        super().__init__(system_object)
+
+    def get_components(self, top_level_only: bool = True):
+        return [
+            Component(system_object)
+            for system_object in self._get_components(top_level_only)
+        ]

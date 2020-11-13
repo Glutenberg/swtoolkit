@@ -5,8 +5,9 @@ import subprocess as sb
 
 import win32com.client
 
-from .interfaces.isldworks import ISldWorks
+# from .assemblydoc import AssemblyDoc
 from .modeldoc import ModelDoc
+from .interfaces.isldworks import ISldWorks
 from .enums.enum_options import DocumentTypes, OpenDocOptions
 
 
