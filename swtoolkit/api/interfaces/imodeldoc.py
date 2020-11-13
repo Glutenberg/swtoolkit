@@ -8,15 +8,13 @@ from ..featuremanager import FeatureManager
 
 class IModelDoc:
     def __init__(self, system_object):
-        self.system_opbject = system_object
+        self.system_object = system_object
 
     @property
     def _instance(self):
-        if self.system_object is not None:
-            return self.system_object
-        else:
+        if self.system_object is None:
             self.system_object = COM("SldWorks.Application").ActiveDoc
-            return self.system_opbject
+        return self.system_object
 
     @property
     def extension(self):
