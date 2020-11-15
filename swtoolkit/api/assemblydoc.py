@@ -3,7 +3,7 @@ from .modeldoc import ModelDoc
 from .interfaces.iassemblydoc import IAssemblyDoc
 
 
-class AssemblyDoc(ModelDoc, IAssemblyDoc):
+class AssemblyDoc(IAssemblyDoc, ModelDoc):
     def __init__(self, system_object):
         super().__init__(system_object)
 
