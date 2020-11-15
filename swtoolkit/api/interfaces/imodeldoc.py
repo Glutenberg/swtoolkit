@@ -1,7 +1,6 @@
 import win32com.client
 import pythoncom
 
-from ..com import COM
 from ..modeldocextension import ModelDocExtension
 from ..featuremanager import FeatureManager
 
@@ -12,8 +11,6 @@ class IModelDoc:
 
     @property
     def _instance(self):
-        if self.system_object is None:
-            self.system_object = COM("SldWorks.Application").ActiveDoc
         return self.system_object
 
     @property
