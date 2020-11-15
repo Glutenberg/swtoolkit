@@ -1,4 +1,4 @@
-.. image:: /_static/logo_swtoolkit.png
+.. image:: docs/_static/logo_swtoolkit.png
         :alt: SW ToolKit. SolidWorks ToolKit for Python
         :align: center
         :width: 600
@@ -20,7 +20,7 @@
         :target: https://swtoolkit.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
-.. image:: /_static/intro_code.png
+.. image:: docs/_static/intro_code.png
         :alt:
         :width: 600
         :align: center

@@ -6,7 +6,7 @@ import subprocess as sb
 import win32com.client
 
 # from .assemblydoc import AssemblyDoc
-from .modeldoc import ModelDoc
+from .doc import Doc
 from .interfaces.isldworks import ISldWorks
 from .enums.enum_options import DocumentTypes, OpenDocOptions
 
@@ -142,7 +142,7 @@ class SolidWorks(ISldWorks):
         Returns:
             :class:`swtoolkit.api.ModelDoc`: A SolidWorks model or document
         """
-        return DocFacotry()
+        return Doc()
 
     def get_models(self):
         """Returns all the model documents currently loaded in the SolidWorks
@@ -152,4 +152,4 @@ class SolidWorks(ISldWorks):
             List of :class:`swtoolkit.api.ModelDoc`: A list of all the
             model/documents loaded in the SolidWorks session
         """
-        return [ModelDoc(system_object) for system_object in self._get_documents()]
+        return [Doc(system_object) for system_object in self._get_documents()]
