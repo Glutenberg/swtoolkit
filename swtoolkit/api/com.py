@@ -4,6 +4,9 @@ import win32com.client
 class COM:
     """COM Interface singleton implementation
 
+    The purpose of this class is to ensure that all objects refer
+    to a common instance of the program being interacted with.
+
     Program     | Prog ID
     ----------- | -------
     Solidworks  | SldWorks.Application

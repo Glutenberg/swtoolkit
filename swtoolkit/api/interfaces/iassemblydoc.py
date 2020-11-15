@@ -20,7 +20,7 @@ class IAssemblyDoc:
             child components in the FeatureManager design tree
 
         Returns:
-            [type]: [description]
+            COM Object: [description]
         """
         arg = win32com.client.VARIANT(pythoncom.VT_BOOL, top_level_only)
         return self._instance.GetComponents(arg)

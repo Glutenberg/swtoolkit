@@ -6,7 +6,7 @@ class Feature(IFeature):
         super().__init__(system_object)
 
     def __repr__(self):
-        return f"{self.__class__.__name__} <{self.name}> <{self.id_}>"
+        return f"{self.__class__.__name__} <{self.name}> <{self.identity}>"
 
     def __str__(self):
         return f"{self.name}"

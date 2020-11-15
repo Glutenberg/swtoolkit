@@ -89,6 +89,7 @@ class IModelDoc:
         retval = self._instance.IsWeldment
         return retval
 
+    @property
     def is_sheetmetal(self):
         pass
 

@@ -1,8 +1,9 @@
 from .component import Component
+from .modeldoc import ModelDoc
 from .interfaces.iassemblydoc import IAssemblyDoc
 
 
-class AssemblyDoc(IAssemblyDoc):
+class AssemblyDoc(ModelDoc, IAssemblyDoc):
     def __init__(self, system_object):
         super().__init__(system_object)
 

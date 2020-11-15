@@ -1,4 +1,3 @@
-from .assemblydoc import AssemblyDoc
 from .interfaces.imodeldoc import IModelDoc
 from .enums.enum_options import DocumentTypes, StandardViews, SaveAsOptions
 
@@ -40,10 +39,6 @@ class ModelDoc(IModelDoc):
         _options = SaveAsOptions[options.upper().replace(" ", "_")].value
         retval, err, warn = self.save3(_options)
         return retval, err.value, warn.value
-
-    def get_assembly(self):
-        if self.type.value == 2:
-            return AssemblyDoc(self._instance)
 
     def set_view(self, view_name: str, fit: bool = False):
         """Allows the model view to be selected

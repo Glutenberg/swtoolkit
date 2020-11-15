@@ -142,7 +142,7 @@ class SolidWorks(ISldWorks):
         Returns:
             :class:`swtoolkit.api.ModelDoc`: A SolidWorks model or document
         """
-        return ModelDoc()
+        return DocFacotry()
 
     def get_models(self):
         """Returns all the model documents currently loaded in the SolidWorks
