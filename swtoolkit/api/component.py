@@ -10,3 +10,9 @@ class Component(IComponent):
 
     def __str__(self):
         return self.name
+
+    def get_children(self):
+        return [Component(system_object) for system_object in self._get_children()]
+
+    def get_parent(self):
+        return Component(self._get_parent())

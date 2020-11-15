@@ -83,8 +83,7 @@ class IModelDoc:
         :rtype: bool
         """
 
-        retval = self._instance.IsWeldment
-        return retval
+        return self._instance.IsWeldment
 
     @property
     def is_sheetmetal(self):
