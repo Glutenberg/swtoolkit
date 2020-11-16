@@ -3,3 +3,7 @@
 __author__ = """Josh Coles"""
 __email__ = "josh@colescanada.com"
 __version__ = "0.0.1"
+
+from .api.solidworks import SolidWorks
+
+__all__ = ["SolidWorks"]
