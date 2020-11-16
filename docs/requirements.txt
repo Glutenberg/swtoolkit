@@ -1,4 +1,3 @@
 sphinxcontrib-napoleon
 sphinx_rtd_theme
 sphinx-autoapi
-pywin32
