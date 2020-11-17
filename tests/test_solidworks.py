@@ -1,6 +1,8 @@
 import subprocess
 import psutil
 
+import pytest
+
 from swtoolkit import SolidWorks
 
 
@@ -24,3 +26,10 @@ def test_kill():
         SolidWorks.start()
     SolidWorks.kill()
     assert "SLDWORKS.exe" not in [p.name() for p in psutil.process_iter()]
+
+
+def test_pid():
+    """Check if PID returned by SolidWorks matches PID in process list"""
+    assert SolidWorks().pid in [
+        p.pid for p in psutil.process_iter() if p.name() == "SLDWORKS.exe"
+    ]
