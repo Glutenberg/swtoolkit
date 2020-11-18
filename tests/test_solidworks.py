@@ -11,7 +11,7 @@ from swtoolkit import SolidWorks
 
 @pytest.fixture
 def init_sldworks():
-    if [p.name() for p in psutil.process_iter()].count("SLDWORKS.exe"):
+    if [p.name() for p in psutil.process_iter()].count("SLDWORKS.exe") > 1:
         subprocess.call("Taskkill /IM SLDWORKS.exe /F")
     return SolidWorks()
 
@@ -48,11 +48,15 @@ def visibility_state():
 
     handles = []
     win32gui.EnumWindows(callback, handles)
-    return bool(
-        [
-            handle for handle in handles if bool(win32gui.GetWindowText(handle))
-        ].remove(patch_handle)
-    )
+
+    handle_list = [
+        handle for handle in handles if bool(win32gui.GetWindowText(handle))
+    ]
+
+    if patch_handle in handle_list:
+        handle_list.remove(patch_handle)
+
+    return bool(handle_list)
 
 
 def test_start():
