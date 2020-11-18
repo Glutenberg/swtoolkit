@@ -50,6 +50,8 @@ class IFeature:
         return self._instance.GetNextFeature
 
     def get_box(self):
-        arg = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_VARIANT, None)
+        arg = win32com.client.VARIANT(
+            pythoncom.VT_BYREF | pythoncom.VT_VARIANT, None
+        )
         self._instance.GetBox(arg)
         return arg.value

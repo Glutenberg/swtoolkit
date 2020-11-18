@@ -137,7 +137,13 @@ latex_elements = {
 # (source start file, target name, title, author, documentclass
 # [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, "swtoolkit.tex", "swtoolkit Documentation", "Josh Coles", "manual"),
+    (
+        master_doc,
+        "swtoolkit.tex",
+        "swtoolkit Documentation",
+        "Josh Coles",
+        "manual",
+    ),
 ]
 
 

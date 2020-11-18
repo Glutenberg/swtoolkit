@@ -48,12 +48,18 @@ class ISldWorks:
     ):
         """Opens a native solidworks document """
 
-        arg1 = win32com.client.VARIANT(pythoncom.VT_BSTR, filename.replace("\\", "/"))
+        arg1 = win32com.client.VARIANT(
+            pythoncom.VT_BSTR, filename.replace("\\", "/")
+        )
         arg2 = win32com.client.VARIANT(pythoncom.VT_I4, type_value)
         arg3 = win32com.client.VARIANT(pythoncom.VT_I4, options)
         arg4 = win32com.client.VARIANT(pythoncom.VT_BSTR, configuration)
-        arg5 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, None)
-        arg6 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, None)
+        arg5 = win32com.client.VARIANT(
+            pythoncom.VT_BYREF | pythoncom.VT_I4, None
+        )
+        arg6 = win32com.client.VARIANT(
+            pythoncom.VT_BYREF | pythoncom.VT_I4, None
+        )
 
         openDoc = self._instance.OpenDoc6
         openDoc(arg1, arg2, arg3, arg4, arg5, arg6)
@@ -64,9 +70,13 @@ class ISldWorks:
         # Activates a loaded document and rebuilds it as specified.
 
         arg1 = win32com.client.VARIANT(pythoncom.VT_BSTR, args[0])
-        arg2 = win32com.client.VARIANT(pythoncom.VT_BOOL, kwargs["use_user_preference"])
+        arg2 = win32com.client.VARIANT(
+            pythoncom.VT_BOOL, kwargs["use_user_preference"]
+        )
         arg3 = win32com.client.VARIANT(pythoncom.VT_I4, kwargs["option"])
-        arg4 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, None)
+        arg4 = win32com.client.VARIANT(
+            pythoncom.VT_BYREF | pythoncom.VT_I4, None
+        )
 
         ActivateDoc = self._instance.ActivateDoc3
         ActivateDoc(arg1, arg2, arg3, arg4)

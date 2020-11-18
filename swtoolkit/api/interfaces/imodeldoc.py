@@ -95,8 +95,12 @@ class IModelDoc:
         """
 
         arg1 = win32com.client.VARIANT(pythoncom.VT_I4, option)
-        arg2 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, None)
-        arg3 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, None)
+        arg2 = win32com.client.VARIANT(
+            pythoncom.VT_BYREF | pythoncom.VT_I4, None
+        )
+        arg3 = win32com.client.VARIANT(
+            pythoncom.VT_BYREF | pythoncom.VT_I4, None
+        )
 
         retval = self._instance.save3(arg1, arg2, arg3)
         return retval, arg2, arg3

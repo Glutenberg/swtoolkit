@@ -32,11 +32,21 @@ class ICustomPropertyManager:
 
     def get_all3(self):
 
-        arg1 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_VARIANT, None)
-        arg2 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_VARIANT, None)
-        arg3 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_VARIANT, None)
-        arg4 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_VARIANT, None)
-        arg5 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_VARIANT, None)
+        arg1 = win32com.client.VARIANT(
+            pythoncom.VT_BYREF | pythoncom.VT_VARIANT, None
+        )
+        arg2 = win32com.client.VARIANT(
+            pythoncom.VT_BYREF | pythoncom.VT_VARIANT, None
+        )
+        arg3 = win32com.client.VARIANT(
+            pythoncom.VT_BYREF | pythoncom.VT_VARIANT, None
+        )
+        arg4 = win32com.client.VARIANT(
+            pythoncom.VT_BYREF | pythoncom.VT_VARIANT, None
+        )
+        arg5 = win32com.client.VARIANT(
+            pythoncom.VT_BYREF | pythoncom.VT_VARIANT, None
+        )
 
         GetAll3 = self._instance.GetAll3
         GetAll3(arg1, arg2, arg3, arg4, arg5)

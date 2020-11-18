@@ -96,7 +96,9 @@ class SolidWorks(ISldWorks):
     def frame_state(self, state):
         self._set_frame_state(state)
 
-    def open(self, path: str, options: str = "silent", configuration: str = str()):
+    def open(
+        self, path: str, options: str = "silent", configuration: str = str()
+    ):
         """Opens a native SolidWorks documents
 
         Args:
