@@ -29,8 +29,6 @@ class ICustomPropertyManager:
         arg3 = win32com.client.VARIANT(pythoncom.VT_BSTR, field_value)
         arg4 = win32com.client.VARIANT(pythoncom.VT_BSTR, overwrite_existing)
 
-        pass
-
     def delete2(self):
         pass
 
