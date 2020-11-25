@@ -1,4 +1,5 @@
 import win32com.client
+import psutil
 
 
 class COM:
@@ -20,6 +21,10 @@ class COM:
             self.com = win32com.client.Dispatch(self.prog_id)
 
     instance = None
+
+    # def process_exists(cls):
+    #     if "SLDWORKS.exe" not in [p.name() for p in psutil.process_iter()]:
+    #         cls.instance = None
 
     def __new__(cls, prog_id):
         if not cls.instance:

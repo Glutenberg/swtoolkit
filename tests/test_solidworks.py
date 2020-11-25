@@ -1,22 +1,21 @@
 import subprocess
 
-import win32con
 import win32gui
 import win32process
 import pytest
 import psutil
 
 from swtoolkit import SolidWorks
+from swtoolkit.api.com import COM
 
 
 @pytest.fixture
-def init_sldworks():
-    if [p.name() for p in psutil.process_iter()].count("SLDWORKS.exe") > 1:
+def init_test_sldworks():
+    if "SLDWORKS.exe" in [p.name() for p in psutil.process_iter()]:
         subprocess.call("Taskkill /IM SLDWORKS.exe /F")
-    return SolidWorks()
+        COM.instance = None
 
 
-@pytest.fixture
 def visibility_state():
     """Gets the visibility state of SLDWORKS.exe via 3rd party package
 
@@ -39,13 +38,6 @@ def visibility_state():
                 handles.append(handle)
         return True
 
-    # Removes the error message box that SolidWorks triggers on Startup from
-    # the list of handles used to determine if solidworks is visible
-    MESSAGE_BOX_CLASS = 32770
-    patch_handle = win32gui.FindWindow(
-        MESSAGE_BOX_CLASS, "Microsoft Visual Basic for Applications"
-    )
-
     handles = []
     win32gui.EnumWindows(callback, handles)
 
@@ -53,19 +45,24 @@ def visibility_state():
         handle for handle in handles if bool(win32gui.GetWindowText(handle))
     ]
 
+    # Removes the error message box that SolidWorks triggers on Startup from
+    # the list of handles used to determine if solidworks is visible
+    MESSAGE_BOX_CLASS = 32770
+    patch_handle = win32gui.FindWindow(
+        MESSAGE_BOX_CLASS, "Microsoft Visual Basic for Applications"
+    )
+
     if patch_handle in handle_list:
         handle_list.remove(patch_handle)
 
     return bool(handle_list)
 
 
-def test_start():
+def test_start(init_test_sldworks):
     """Checks if SolidWorks is in the process list before and after
     execution of start().
     """
-
-    if "SLDWORKS.exe" in [p.name() for p in psutil.process_iter()]:
-        subprocess.call("Taskkill /IM SLDWORKS.exe /F")
+    init_test_sldworks
     SolidWorks.start()
     assert "SLDWORKS.exe" in [p.name() for p in psutil.process_iter()]
 
@@ -81,30 +78,24 @@ def test_kill():
     assert "SLDWORKS.exe" not in [p.name() for p in psutil.process_iter()]
 
 
-def test_pid(init_sldworks):
+def test_pid(init_test_sldworks):
     """Check if PID returned by SolidWorks matches PID in process list"""
-    sldworks = init_sldworks
-    assert sldworks.pid in [
+
+    init_test_sldworks
+    assert SolidWorks().pid in [
         p.pid for p in psutil.process_iter() if p.name() == "SLDWORKS.exe"
     ]
 
 
-# @pytest.mark.xfail
-def test_visible_get(init_sldworks, visibility_state):
-    sldworks = init_sldworks
-    assert sldworks.visible == visibility_state
+def test_visible_get(init_test_sldworks):
+    init_test_sldworks
+    assert SolidWorks().visible is False
 
 
-def test_visible_set():
-    pass
-
-
-def test_frame_state_get():
-    pass
-
-
-def test_frame_state_set():
-    pass
+def test_visible_set(init_test_sldworks):
+    init_test_sldworks
+    SolidWorks().visible = True
+    assert SolidWorks().visible is True
 
 
 def test_open():

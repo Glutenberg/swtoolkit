@@ -54,3 +54,18 @@ class SaveAsOptions(Enum):
     SAVE_REFERENCED = 4
     SILENT = 1
     UPDATE_INACTIVE_VIEWS = 16
+
+
+class CustomInfoType(Enum):
+    DATE = 64
+    DOUBLE = 5
+    NUMBER = 3
+    TEXT = 30
+    UNKNOWN = 0
+    YES_OR_NO = 11
+
+
+class CustomPropertyAddOption(Enum):
+    DELETE_AND_ADD = 1
+    ONLY_IF_NEW = 0
+    REPLACE_VALUE = 2
