@@ -13,10 +13,26 @@ class CustomPropertyManager(ICustomPropertyManager):
         super().__init__(parent, config_name)
 
     def get_all(self):
-        """Returns all custom properties. """
+        """Gets all the custom properties for the current active configuration
+
+        Returns:
+            List of Tuples: A list of tuples; each containing the following:
+                1. Property Name,
+                2. Property Type,
+                3. Property Value,
+                4. Resolved - A result code,
+                5. Property Link
+
+        """
         arg1, arg2, arg3, arg4, arg5 = self.get_all3()
-        return tuple(
-            zip(arg5.value, arg4.value, arg3.value, arg2.value, arg1.value)
+        return list(
+            zip(
+                arg5.value,
+                CustomInfoType(arg4.value),
+                arg3.value,
+                CustomInfoGetResult(arg2.value),
+                arg1.value,
+            )
         )
 
     def add(self, field_name, field_type, field_value, overwrite_existing):
