@@ -56,5 +56,5 @@ class ModelDoc(IModelDoc):
             self.zoom_to_fit()
 
     def zoom_to_fit(self):
-        """Fits model to viewport. """
+        """Fits model to viewport."""
         self.view_zoom_to_fit2()

@@ -22,20 +22,39 @@ class ICustomPropertyManager:
     def owner(self):
         return self._instance.Owner
 
-    def add3(self, field_name, field_type, field_value, overwrite_existing):
+    def _add3(self, field_name, field_type, field_value, overwrite_existing):
 
         arg1 = win32com.client.VARIANT(pythoncom.VT_BSTR, field_name)
         arg2 = win32com.client.VARIANT(pythoncom.VT_BSTR, field_type)
         arg3 = win32com.client.VARIANT(pythoncom.VT_BSTR, field_value)
         arg4 = win32com.client.VARIANT(pythoncom.VT_BSTR, overwrite_existing)
+        return self._instance.Add3(arg1, arg2, arg3, arg4)
 
-    def delete2(self):
-        pass
+    def _delete2(self, field_name):
 
-    def get6(self):
-        pass
+        arg1 = win32com.client.VARIANT(pythoncom.VT_BSTR, field_name)
+        return self._instance.Delete2(arg1)
 
-    def set2(self):
+    def _get6(
+        self,
+        field_name,
+        use_cached,
+        val_out,
+        resolved_val_out,
+        was_resolved,
+        link_to_property,
+    ):
+
+        arg1 = win32com.client.VARIANT(pythoncom.VT_BSTR, field_name)
+        arg2 = win32com.client.VARIANT(pythoncom.VT_BSTR, use_cached)
+        arg3 = win32com.client.VARIANT(pythoncom.VT_BSTR, val_out)
+        arg4 = win32com.client.VARIANT(pythoncom.VT_BSTR, resolved_val_out)
+        arg5 = win32com.client.VARIANT(pythoncom.VT_BSTR, was_resolved)
+        arg6 = win32com.client.VARIANT(pythoncom.VT_BSTR, link_to_property)
+
+        return self._instance.Get6(arg1, arg2, arg3, arg4, arg5, arg6)
+
+    def _set2(self):
         pass
 
     def _get_all3(self):

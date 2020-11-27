@@ -1,0 +1,17 @@
+"""Contains enumerations for SolidWorks Warnings."""
+
+from enum import Enum
+
+
+class FileSaveWarning(Enum):
+    ANIMATOR_CAMERA_VIEWS = 128
+    ANIMATOR_FEATURE_EDITS = 16
+    ANIMATOR_LIGHT_EDITS = 64
+    ANIMATOR_NEED_TO_SOLVE = 8
+    ANIMATOR_SECTION_VIEWS = 256
+    EDRWINGS_BAD_SELECTION = 32
+    MISSING_OLE_OBJECTS = 512
+    NEEDS_REBUILD = 2
+    OPENED_VIEW_ONLY = 1024
+    REBUILD_ERROR = 1
+    VIEWS_NEED_UPDATE = 4
