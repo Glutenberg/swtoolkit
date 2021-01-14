@@ -5,15 +5,9 @@ import win32process
 import pytest
 import psutil
 
+
 from swtoolkit import SolidWorks
 from swtoolkit.api.com import COM
-
-
-@pytest.fixture
-def init_test_sldworks():
-    if "SLDWORKS.exe" in [p.name() for p in psutil.process_iter()]:
-        subprocess.call("Taskkill /IM SLDWORKS.exe /F")
-        COM.instance = None
 
 
 def visibility_state():
@@ -67,7 +61,7 @@ def test_start(init_test_sldworks):
     assert "SLDWORKS.exe" in [p.name() for p in psutil.process_iter()]
 
 
-def test_kill():
+def test_kill(init_test_sldworks):
     """Checks if SolidWorks is not in the process list before and after
     execution of kill().
     """
@@ -82,6 +76,7 @@ def test_pid(init_test_sldworks):
     """Check if PID returned by SolidWorks matches PID in process list"""
 
     init_test_sldworks
+    SolidWorks.start()
     assert SolidWorks().pid in [
         p.pid for p in psutil.process_iter() if p.name() == "SLDWORKS.exe"
     ]

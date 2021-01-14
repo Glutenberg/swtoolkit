@@ -8,7 +8,8 @@ import win32com.client
 # from .assemblydoc import AssemblyDoc
 from .doc import Doc
 from .interfaces.isldworks import ISldWorks
-from .enums.enum_options import DocumentTypes, OpenDocOptions
+from .enums.enum_options import OpenDocOptions
+from .enums.enum_types import DocumentTypes
 
 
 class SolidWorks(ISldWorks):

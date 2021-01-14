@@ -1,5 +1,6 @@
 from .interfaces.imodeldoc import IModelDoc
-from .enums.enum_options import DocumentTypes, StandardViews, SaveAsOptions
+from .enums.enum_options import StandardViews, SaveAsOptions
+from .enums.enum_types import DocumentTypes
 
 
 class ModelDoc(IModelDoc):

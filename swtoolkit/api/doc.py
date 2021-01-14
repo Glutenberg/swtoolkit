@@ -1,7 +1,7 @@
 from .assemblydoc import AssemblyDoc
 from .com import COM
 from .drawingdoc import DrawingDoc
-from .enums.enum_options import DocumentTypes
+from .enums.enum_types import DocumentTypes
 from .partdoc import PartDoc
 
 
