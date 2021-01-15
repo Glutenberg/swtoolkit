@@ -4,6 +4,7 @@ import win32gui
 import win32process
 import pytest
 import psutil
+import os
 
 
 from swtoolkit import SolidWorks
@@ -52,16 +53,16 @@ def visibility_state():
     return bool(handle_list)
 
 
-def test_start(init_test_sldworks):
+def test_start():
     """Checks if SolidWorks is in the process list before and after
     execution of start().
     """
-    init_test_sldworks
     SolidWorks.start()
     assert "SLDWORKS.exe" in [p.name() for p in psutil.process_iter()]
 
 
-def test_kill(init_test_sldworks):
+@pytest.mark.usefixtures("teardown_sldworks")
+def test_kill():
     """Checks if SolidWorks is not in the process list before and after
     execution of kill().
     """
@@ -72,28 +73,43 @@ def test_kill(init_test_sldworks):
     assert "SLDWORKS.exe" not in [p.name() for p in psutil.process_iter()]
 
 
-def test_pid(init_test_sldworks):
+def test_pid():
     """Check if PID returned by SolidWorks matches PID in process list"""
 
-    init_test_sldworks
     SolidWorks.start()
     assert SolidWorks().pid in [
         p.pid for p in psutil.process_iter() if p.name() == "SLDWORKS.exe"
     ]
 
 
-def test_visible_get(init_test_sldworks):
-    init_test_sldworks
+def test_visible_get():
+    """Check if SolidWorks returns its visibility state. Default state is
+    False
+    """
     assert SolidWorks().visible is False
 
 
-def test_visible_set(init_test_sldworks):
-    init_test_sldworks
+def test_visible_set():
+    """Check if visibility state can be set via changing attribute bool
+    value
+    """
     SolidWorks().visible = True
     assert SolidWorks().visible is True
 
 
-def test_open():
+@pytest.mark.parametrize(
+    "filename",
+    [
+        os.getcwd().replace("\\", "/") + filename
+        for filename in [
+            "tests/test_cad/test_native_part.SLDPRT",
+            "tests/test_cad/test_native_assembly.SLDASM",
+            "tests/test_cad/test_native_drawing.SLDDRW",
+        ]
+    ],
+)
+def test_open(filename):
+    SolidWorks().open(filename)
     pass
 
 

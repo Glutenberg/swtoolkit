@@ -5,15 +5,16 @@ import psutil
 from swtoolkit.api.com import COM
 
 
-@pytest.fixture
-def init_test_sldworks(teardown_sldworks):
-    if "SLDWORKS.exe" in [p.name() for p in psutil.process_iter()]:
-        teardown_sldworks
+@pytest.fixture(autouse=True)
+def setup_sldworks():
+    pass
 
 
 @pytest.fixture
 def teardown_sldworks(com_reset):
-    subprocess.call("Taskkill /IM SLDWORKS.exe /F")
+    yield
+    if "SLDWORKS.exe" in [p.name() for p in psutil.process_iter()]:
+        subprocess.call("Taskkill /IM SLDWORKS.exe /F")
     com_reset
 
 
@@ -26,3 +27,9 @@ def com_reset():
     """
 
     COM.instance = None
+
+
+# def pytest_sessionfinish(session, exitstatus):
+#     COM.instance = None
+#     if "SLDWORKS.exe" in [p.name() for p in psutil.process_iter()]:
+#         subprocess.call("Taskkill /IM SLDWORKS.exe /F")
