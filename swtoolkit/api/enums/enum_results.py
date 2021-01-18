@@ -20,3 +20,10 @@ class CustomInfoGetResult(Enum):
     CACHED_VALUE = 0
     NOT_PRESENT = 1
     RESOLVED_VALUE = 2
+
+
+class CustomInfoSetResult(Enum):
+    LINKED_PROP = 3
+    NOT_PRESENT = 1
+    OK = 0
+    TYPE_MISMATCH = 2

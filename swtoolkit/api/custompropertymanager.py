@@ -5,6 +5,7 @@ from .enums.enum_results import (
     CustomInfoAddResult,
     CustomInfoDeleteResult,
     CustomInfoGetResult,
+    CustomInfoSetResult,
 )
 
 
@@ -53,5 +54,17 @@ class CustomPropertyManager(ICustomPropertyManager):
         retval = self._delete2(field_name)
         return CustomInfoDeleteResult(retval)
 
-    def get(self):
+    def get(
+        self,
+        field_name,
+        use_cached,
+        val_out,
+        resolved_val_out,
+        was_resolved,
+        link_to_property,
+    ):
         pass
+
+    def set_(self, field_name, field_value):
+        retval = self._set2(field_name, field_value)
+        return CustomInfoSetResult(retval)

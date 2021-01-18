@@ -54,8 +54,15 @@ class ICustomPropertyManager:
 
         return self._instance.Get6(arg1, arg2, arg3, arg4, arg5, arg6)
 
-    def _set2(self):
-        pass
+    def _set2(self, field_name, field_value):
+
+        arg1 = win32com.client.VARIANT(pythoncom.VT_BSTR, field_name)
+        arg2 = win32com.client.VARIANT(pythoncom.VT_BSTR, field_value)
+
+        Set2 = self._instance.Set2
+        retval = Set2(arg1, arg2)
+
+        return retval
 
     def _get_all3(self):
 
