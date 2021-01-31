@@ -26,11 +26,13 @@ SolidWorks Toolkit for Python
 
 .. |Made With Python| image:: http://ForTheBadge.com/images/badges/made-with-python.svg
         :target: https://www.python.org/
+        :width: 100
         :alt: |
 
 |Works on My Machine|
 
 .. |Works on My Machine| image:: https://forthebadge.com/images/badges/works-on-my-machine.svg
         :target: https://forthebadge.com
+        :width: 100
         :alt: |
 
