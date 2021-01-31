@@ -12,14 +12,6 @@
         :target: https://pypi.python.org/pypi/swtoolkit
         :alt: PyPi Version
 
-.. image:: https://img.shields.io/travis/Glutenberg/swtoolkit.svg
-        :target: https://travis-ci.com/Glutenberg/swtoolkit
-        :alt: Build Status
-
-.. image:: https://readthedocs.org/projects/swtoolkit/badge/?version=latest
-        :target: https://swtoolkit.readthedocs.io/en/latest/?badge=latest
-        :alt: Documentation Status
-
 .. image:: docs/images/intro_code.png
         :alt:
         :width: 600
