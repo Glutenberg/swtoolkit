@@ -22,8 +22,9 @@ SolidWorks Toolkit for Python
 
 * Free software: MIT license
 
+|Test|
 
-.. image:: http://ForTheBadge.com/images/badges/made-with-python.svg
+.. |Test| image:: http://ForTheBadge.com/images/badges/made-with-python.svg
         :target: https://www.python.org/
         :alt: |
 
