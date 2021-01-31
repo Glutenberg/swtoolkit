@@ -9,6 +9,7 @@
 
 .. image:: https://img.shields.io/pypi/v/swtoolkit.svg?style=flat-square
         :target: https://pypi.python.org/pypi/swtoolkit
+        :width: 150
         :alt: PyPi Version
 
 .. image:: docs/images/intro_code.png
