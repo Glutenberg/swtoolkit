@@ -7,7 +7,7 @@
    section.
 
 
-.. |PyPi Badge| image:: https://img.shields.io/pypi/v/swtoolkit.svg?style=flat-square
+.. image:: https://img.shields.io/pypi/v/swtoolkit.svg?style=flat-square
         :target: https://pypi.python.org/pypi/swtoolkit
         :alt: PyPi Version
 
@@ -26,6 +26,6 @@ SolidWorks Toolkit for Python
         :target: https://forthebadge.com
         :alt: |
 
-.. |forthebadge made-with-python| image:: http://ForTheBadge.com/images/badges/made-with-python.svg
+.. image:: http://ForTheBadge.com/images/badges/made-with-python.svg
         :target: https://www.python.org/
         :alt: |
