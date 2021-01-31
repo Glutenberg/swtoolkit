@@ -1,8 +1,11 @@
 [tool.poetry]
 name = "swtoolkit"
 version = "0.1.0"
-description = ""
+description = "A SolidWorks Toolkit for Python"
+license = "MIT"
 authors = ["Glutenberg <josh@colescanada.com>"]
+readme = "README.rst"
+repository = "https://github.com/Glutenberg/swtoolkit.git"
 
 [tool.poetry.dependencies]
 python = "^3.9"
