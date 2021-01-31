@@ -22,14 +22,15 @@ SolidWorks Toolkit for Python
 
 * Free software: MIT license
 
-|Test|
+|Made With Python|
 
-.. |Test| image:: http://ForTheBadge.com/images/badges/made-with-python.svg
+.. |Made With Python| image:: http://ForTheBadge.com/images/badges/made-with-python.svg
         :target: https://www.python.org/
         :alt: |
 
+|Works on My Machine|
 
-.. image:: https://forthebadge.com/images/badges/works-on-my-machine.svg
+.. |Works on My Machine| image:: https://forthebadge.com/images/badges/works-on-my-machine.svg
         :target: https://forthebadge.com
         :alt: |
 
