@@ -6,9 +6,8 @@
 .. This '|' generates a blank line to avoid sticking the logo to the
    section.
 
-|
 
-.. image:: https://img.shields.io/pypi/v/swtoolkit.svg
+.. |PyPi Badge| image:: https://img.shields.io/pypi/v/swtoolkit.svg?style=flat-square
         :target: https://pypi.python.org/pypi/swtoolkit
         :alt: PyPi Version
 
@@ -22,3 +21,11 @@ SolidWorks Toolkit for Python
 **SW ToolKit** allows you to leverage Python to quickly develop powerful scripts and programs to automate your SolidWorks workflow.
 
 * Free software: MIT license
+
+.. image:: https://forthebadge.com/images/badges/works-on-my-machine.svg
+        :target: https://forthebadge.com
+        :alt: |
+
+.. |forthebadge made-with-python| image:: http://ForTheBadge.com/images/badges/made-with-python.svg
+        :target: https://www.python.org/
+        :alt: |
