@@ -9,11 +9,10 @@
 
 .. image:: https://img.shields.io/pypi/v/swtoolkit.svg?style=flat-square
         :target: https://pypi.python.org/pypi/swtoolkit
-        :width: 150
         :alt: PyPi Version
 
 .. image:: docs/images/intro_code.png
-        :alt:
+        :alt: |
         :width: 600
         :align: center
 
@@ -27,13 +26,5 @@ SolidWorks Toolkit for Python
 
 .. |Made With Python| image:: http://ForTheBadge.com/images/badges/made-with-python.svg
         :target: https://www.python.org/
-        :width: 200
-        :alt: |
-
-|Works on My Machine|
-
-.. |Works on My Machine| image:: https://forthebadge.com/images/badges/works-on-my-machine.svg
-        :target: https://forthebadge.com
-        :width: 200
         :alt: |
 

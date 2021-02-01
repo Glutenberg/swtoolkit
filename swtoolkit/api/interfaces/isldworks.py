@@ -69,13 +69,6 @@ class ISldWorks:
         return arg4
 
     def _close_all_documents(self, include_unsaved: bool):
-        """Closes all open documents
-
-        :param include_unsaved: Include unsaved documents is function execution
-        :type include_unsaved: bool
-        :return: Execution feedback. True if successeful
-        :rtype: bool
-        """
 
         arg1 = win32com.client.VARIANT(pythoncom.VT_BOOL, include_unsaved)
         return self._instance.CloseAllDocuments(arg1)
