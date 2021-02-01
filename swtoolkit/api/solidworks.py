@@ -97,9 +97,7 @@ class SolidWorks(ISldWorks):
     def frame_state(self, state):
         self._set_frame_state(state)
 
-    def open(
-        self, path: str, options: str = "silent", configuration: str = str()
-    ):
+    def open(self, path: str, options: str = "silent", configuration: str = str()):
         """Opens a native SolidWorks documents
 
         Args:
@@ -129,8 +127,10 @@ class SolidWorks(ISldWorks):
             raise ValueError("Incompatible File Type")
 
         _options = OpenDocOptions[options.upper().replace(" ", "_")].value
-        err, warn = self._opendoc6(path, type_value, _options, configuration)
-        return err.value, warn.value
+        pointer, error, warning = self._opendoc6(
+            path, type_value, _options, configuration
+        )
+        return Doc(pointer), error, warning
 
     def shutdown(self):
         """Exits the SolidWorks session
@@ -156,3 +156,14 @@ class SolidWorks(ISldWorks):
             model/documents loaded in the SolidWorks session
         """
         return [Doc(system_object) for system_object in self._get_documents()]
+
+    def close_all_documents(self, include_unsaved: bool = False):
+        """Closes all open documents
+
+        :param include_unsaved: Include unsaved documents is function execution
+        :type include_unsaved: bool
+        :return: Execution feedback. True if successeful
+        :rtype: bool
+        """
+
+        return self._close_all_documents(include_unsaved)

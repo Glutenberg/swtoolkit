@@ -20,14 +20,10 @@ def visibility_state():
     invisible.
     """
 
-    target_pid = [
-        p.pid for p in psutil.process_iter() if p.name() == "SLDWORKS.exe"
-    ]
+    target_pid = [p.pid for p in psutil.process_iter() if p.name() == "SLDWORKS.exe"]
 
     def callback(handle, handles):
-        if win32gui.IsWindowEnabled(handle) and win32gui.IsWindowVisible(
-            handle
-        ):
+        if win32gui.IsWindowEnabled(handle) and win32gui.IsWindowVisible(handle):
             _, pid = win32process.GetWindowThreadProcessId(handle)
             if pid in target_pid:
                 handles.append(handle)
@@ -36,9 +32,7 @@ def visibility_state():
     handles = []
     win32gui.EnumWindows(callback, handles)
 
-    handle_list = [
-        handle for handle in handles if bool(win32gui.GetWindowText(handle))
-    ]
+    handle_list = [handle for handle in handles if bool(win32gui.GetWindowText(handle))]
 
     # Removes the error message box that SolidWorks triggers on Startup from
     # the list of handles used to determine if solidworks is visible
@@ -100,7 +94,7 @@ def test_visible_set():
 @pytest.mark.parametrize(
     "filename",
     [
-        os.getcwd().replace("\\", "/") + filename
+        os.path.join(os.getcwd(), filename)
         for filename in [
             "tests/test_cad/test_native_part.SLDPRT",
             "tests/test_cad/test_native_assembly.SLDASM",
@@ -109,8 +103,10 @@ def test_visible_set():
     ],
 )
 def test_open(filename):
-    SolidWorks().open(filename)
-    pass
+    """ Test if native solidworks files can be opened """
+    retval = SolidWorks().open(filename)
+    assert retval[0]  # Returned value is true if file is opened successfully.
+    SolidWorks().close_all_documents()
 
 
 def test_shutdown():

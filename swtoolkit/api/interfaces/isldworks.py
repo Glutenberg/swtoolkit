@@ -26,11 +26,7 @@ class ISldWorks:
         return self._instance.Visible
 
     def _set_visible(self, state: bool):
-        """Sets the visibility of the SolidWorks session.
-
-        Args:
-            state (bool): The visibility state. True is visible
-        """
+        """Sets the visibility of the SolidWorks session."""
         self._instance.Visible = state
 
     def _get_frame_state(self):
@@ -48,42 +44,31 @@ class ISldWorks:
     ):
         """Opens a native solidworks document """
 
-        arg1 = win32com.client.VARIANT(
-            pythoncom.VT_BSTR, filename.replace("\\", "/")
-        )
+        arg1 = win32com.client.VARIANT(pythoncom.VT_BSTR, filename.replace("\\", "/"))
         arg2 = win32com.client.VARIANT(pythoncom.VT_I4, type_value)
         arg3 = win32com.client.VARIANT(pythoncom.VT_I4, options)
         arg4 = win32com.client.VARIANT(pythoncom.VT_BSTR, configuration)
-        arg5 = win32com.client.VARIANT(
-            pythoncom.VT_BYREF | pythoncom.VT_I4, None
-        )
-        arg6 = win32com.client.VARIANT(
-            pythoncom.VT_BYREF | pythoncom.VT_I4, None
-        )
+        arg5 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, None)
+        arg6 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, None)
 
         openDoc = self._instance.OpenDoc6
-        openDoc(arg1, arg2, arg3, arg4, arg5, arg6)
+        pointer = openDoc(arg1, arg2, arg3, arg4, arg5, arg6)
 
-        return arg5, arg6  # (Errors, Warnings)
+        return pointer, arg5, arg6  # (Errors, Warnings)
 
-    def activate_doc(self, *args, **kwargs):
-        # Activates a loaded document and rebuilds it as specified.
+    def _activate_doc(self, *args, **kwargs):
 
         arg1 = win32com.client.VARIANT(pythoncom.VT_BSTR, args[0])
-        arg2 = win32com.client.VARIANT(
-            pythoncom.VT_BOOL, kwargs["use_user_preference"]
-        )
+        arg2 = win32com.client.VARIANT(pythoncom.VT_BOOL, kwargs["use_user_preference"])
         arg3 = win32com.client.VARIANT(pythoncom.VT_I4, kwargs["option"])
-        arg4 = win32com.client.VARIANT(
-            pythoncom.VT_BYREF | pythoncom.VT_I4, None
-        )
+        arg4 = win32com.client.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, None)
 
         ActivateDoc = self._instance.ActivateDoc3
         ActivateDoc(arg1, arg2, arg3, arg4)
 
         return arg4
 
-    def close_all_documents(self, include_unsaved: bool):
+    def _close_all_documents(self, include_unsaved: bool):
         """Closes all open documents
 
         :param include_unsaved: Include unsaved documents is function execution
@@ -95,7 +80,7 @@ class ISldWorks:
         arg1 = win32com.client.VARIANT(pythoncom.VT_BOOL, include_unsaved)
         return self._instance.CloseAllDocuments(arg1)
 
-    def close_doc(self, name):
+    def _close_doc(self, name):
         arg = win32com.client.VARIANT(pythoncom.VT_BSTR, name)
         return self._instance.CloseDoc(arg)
 
