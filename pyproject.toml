@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "swtoolkit"
-version = "0.1.0"
+version = "0.1.1"
 description = "A SolidWorks Toolkit for Python"
 license = "MIT"
 authors = ["Glutenberg <josh@colescanada.com>"]
